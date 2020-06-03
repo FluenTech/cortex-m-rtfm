@@ -238,7 +238,7 @@ signature <code>fn(idle::Context) - &gt; !</code>.</p>
 <p>When present, the runtime will execute the <code>idle</code> task after <code>init</code>. Unlike
 <code>init</code>, <code>idle</code> will run <em>with interrupts enabled</em> and it's not allowed to return
 so it must run forever.</p>
-<p>When no <code>idle</code> function is declared, the runtime sets the <a href="https://developer.arm.com/products/architecture/cpu-architecture/m-profile/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a> bit and
+<p>When no <code>idle</code> function is declared, the runtime sets the <a href="https://developer.arm.com/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a> bit and
 then sends the microcontroller to sleep after running <code>init</code>.</p>
 <p>Like in <code>init</code>, <code>static mut</code> variables will be transformed into <code>&amp;'static mut</code>
 references that are safe to access.</p>

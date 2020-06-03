@@ -336,7 +336,7 @@ init
 <p>Когда она присутствует, рантайм запустит задачу <code>idle</code> после <code>init</code>. В отличие от
 <code>init</code>, <code>idle</code> запустится <em>с включенными прерываниями</em> и не может завершиться,
 поэтому будет работать бесконечно.</p>
-<p>Когда функция <code>idle</code> не определена, рантайм устанавливает бит <a href="https://developer.arm.com/products/architecture/cpu-architecture/m-profile/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a>, после чего
+<p>Когда функция <code>idle</code> не определена, рантайм устанавливает бит <a href="https://developer.arm.com/docs/100737/0100/power-management/sleep-mode/sleep-on-exit-bit">SLEEPONEXIT</a>, после чего
 отправляет микроконтроллер в состояние сна после выполнения <code>init</code>.</p>
 <p>Как и в <code>init</code>, переменные <code>static mut</code>будут преобразованы в ссылки <code>&amp;'static mut</code>
 с безопасным доступом.</p>

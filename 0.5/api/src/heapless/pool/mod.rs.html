@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/heapless-0.5.3/src/pool/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../heapless/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/heapless-0.5.5/src/pool/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../heapless/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -579,6 +579,73 @@
 <span id="579">579</span>
 <span id="580">580</span>
 <span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! A heap-less, interrupt-safe, lock-free memory pool (\*)</span>
 <span class="doccomment">//!</span>
@@ -658,10 +725,11 @@
 <span class="doccomment">//!     let set_order = ..;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     // `self.head` has type `AtomicPtr&lt;Node&lt;T&gt;&gt;`</span>
+<span class="doccomment">//!     // where `struct Node&lt;T&gt; { next: AtomicPtr&lt;Node&lt;T&gt;&gt;, data: UnsafeCell&lt;T&gt; }`</span>
 <span class="doccomment">//!     let mut head = self.head.load(fetch_order);</span>
 <span class="doccomment">//!     loop {</span>
 <span class="doccomment">//!         if let Some(nn_head) = NonNull::new(head) {</span>
-<span class="doccomment">//!             let next = unsafe { (*head).next };</span>
+<span class="doccomment">//!             let next = unsafe { (*head).next.load(Ordering::Relaxed) };</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!             // &lt;~ preempted</span>
 <span class="doccomment">//!</span>
@@ -732,6 +800,65 @@
 <span class="doccomment">//! while the current core is somewhere between LDREX and STREX then the current core will fail its</span>
 <span class="doccomment">//! STREX operation.</span>
 <span class="doccomment">//!</span>
+<span class="doccomment">//! # x86_64 support / limitations</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! *NOTE* `Pool` is only `Sync` on `x86_64` if the Cargo feature &quot;x86-sync-pool&quot; is enabled</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! x86_64 support is a gamble. Yes, a gamble. Do you feel lucky enough to use `Pool` on x86_64?</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! As it&#39;s not possible to implement *ideal* LL/SC semantics (\*) on x86_64 the architecture is</span>
+<span class="doccomment">//! susceptible to the ABA problem described above. To *reduce the chances* of ABA occurring in</span>
+<span class="doccomment">//! practice we use version tags (keyword: IBM ABA-prevention tags). Again, this approach does</span>
+<span class="doccomment">//! *not* fix / prevent / avoid the ABA problem; it only reduces the chance of it occurring in</span>
+<span class="doccomment">//! practice but the chances of it occurring are not reduced to zero.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! How we have implemented version tags: instead of using an `AtomicPtr` to link the stack `Node`s</span>
+<span class="doccomment">//! we use an `AtomicUsize` where the 64-bit `usize` is always comprised of a monotonically</span>
+<span class="doccomment">//! increasing 32-bit tag (higher bits) and a 32-bit signed address offset. The address of a node is</span>
+<span class="doccomment">//! computed by adding the 32-bit offset to an &quot;anchor&quot; address (the address of a static variable</span>
+<span class="doccomment">//! that lives somewhere in the `.bss` linker section). The tag is increased every time a node is</span>
+<span class="doccomment">//! popped (removed) from the stack.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! To see how version tags can prevent ABA consider the example from the previous section. Let&#39;s</span>
+<span class="doccomment">//! start with a stack in this state: `(~A, 0) -&gt; (~B, 1) -&gt; (~C, 2)`, where `~A` represents the</span>
+<span class="doccomment">//! address of node A as a 32-bit offset from the &quot;anchor&quot; and the second tuple element (e.g. `0`)</span>
+<span class="doccomment">//! indicates the version of the node. For simplicity, assume a single core system: thread T1 is</span>
+<span class="doccomment">//! performing `pop` and before `CAS(&amp;self.head, (~A, 0), (~B, 1))` is executed a context switch</span>
+<span class="doccomment">//! occurs and the core resumes T2. T2 pops the stack twice and pushes A back into the stack;</span>
+<span class="doccomment">//! because the `pop` operation increases the version the stack ends in the following state: `(~A,</span>
+<span class="doccomment">//! 1) -&gt; (~C, 2)`. Now if T1 is resumed the CAS operation will fail because `self.head` is `(~A,</span>
+<span class="doccomment">//! 1)` and not `(~A, 0)`.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! When can version tags fail to prevent ABA? Using the previous example: if T2 performs a `push`</span>
+<span class="doccomment">//! followed by a `pop` `(1 &lt;&lt; 32) - 1` times before doing its original `pop` - `pop` - `push`</span>
+<span class="doccomment">//! operation then ABA will occur because the version tag of node `A` will wraparound to its</span>
+<span class="doccomment">//! original value of `0` and the CAS operation in T1 will succeed and corrupt the stack.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! It does seem unlikely that (1) a thread will perform the above operation and (2) that the above</span>
+<span class="doccomment">//! operation will complete within one time slice, assuming time sliced threads. If you have thread</span>
+<span class="doccomment">//! priorities then the above operation could occur during the lifetime of many high priorities</span>
+<span class="doccomment">//! threads if T1 is running at low priority.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Other implementations of version tags use more than 32 bits in their tags (e.g. &quot;Scalable</span>
+<span class="doccomment">//! Lock-Free Dynamic Memory Allocation&quot; uses 42-bit tags in its super blocks). In theory, one could</span>
+<span class="doccomment">//! use double-word CAS on x86_64 to pack a 64-bit tag and a 64-bit pointer in a double-word but</span>
+<span class="doccomment">//! this CAS operation is not exposed in the standard library (and I think it&#39;s not available on</span>
+<span class="doccomment">//! older x86_64 processors?)</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! (\*) Apparently one can emulate proper LL/SC semantics on x86_64 using hazard pointers (?) --</span>
+<span class="doccomment">//! the technique appears to be documented in &quot;ABA Prevention Using Single-Word Instructions&quot;, which</span>
+<span class="doccomment">//! is not public AFAICT -- but hazard pointers require Thread Local Storage (TLS), which is a</span>
+<span class="doccomment">//! non-starter for a `no_std` library like `heapless`.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## x86_64 Limitations</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Because stack nodes must be located within +- 2 GB of the hidden `ANCHOR` variable, which</span>
+<span class="doccomment">//! lives in the `.bss` section, `Pool` may not be able to manage static references created using</span>
+<span class="doccomment">//! `Box::leak` -- these heap allocated chunks of memory may live in a very different address space.</span>
+<span class="doccomment">//! When the `Pool` is unable to manage a node because of its address it will simply discard it:</span>
+<span class="doccomment">//! `Pool::grow*` methods return the number of new memory blocks added to the pool; if these methods</span>
+<span class="doccomment">//! return `0` it means the `Pool` is unable to manage the memory given to them.</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! # References</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! 1. [Cortex-M3 Devices Generic User Guide (DUI 0552A)][0], Section 2.2.7 &quot;Synchronization</span>
@@ -743,36 +870,49 @@
 <span class="doccomment">//! semaphores&quot;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [1]: https://static.docs.arm.com/ddi0403/eb/DDI0403E_B_armv7m_arm.pdf</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! 3. &quot;Scalable Lock-Free Dynamic Memory Allocation&quot; Michael, Maged M.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! 4. &quot;Hazard pointers: Safe memory reclamation for lock-free objects.&quot; Michael, Maged M.</span>
 
-<span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">any</span>::<span class="ident">TypeId</span>, <span class="ident">mem</span>, <span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">Ordering</span>};
+<span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">any</span>::<span class="ident">TypeId</span>, <span class="ident">mem</span>};
 <span class="kw">use</span> <span class="ident">core</span>::{
-    <span class="ident">cell</span>::<span class="ident">UnsafeCell</span>,
     <span class="ident">cmp</span>, <span class="ident">fmt</span>,
     <span class="ident">hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>},
     <span class="ident">marker</span>::<span class="ident">PhantomData</span>,
     <span class="ident">mem</span>::<span class="ident">MaybeUninit</span>,
     <span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>},
-    <span class="ident">ptr</span>::{<span class="self">self</span>, <span class="ident">NonNull</span>},
-    <span class="ident">sync</span>::<span class="ident">atomic</span>::<span class="ident">AtomicPtr</span>,
+    <span class="ident">ptr</span>,
 };
 
 <span class="kw">use</span> <span class="ident">as_slice</span>::{<span class="ident">AsMutSlice</span>, <span class="ident">AsSlice</span>};
 
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">stack</span>::<span class="ident">Node</span>;
+<span class="kw">use</span> <span class="ident">stack</span>::{<span class="ident">Ptr</span>, <span class="ident">Stack</span>};
+
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">singleton</span>;
+<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>, <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;cas.rs&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>), <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;llsc.rs&quot;</span>)]</span>
+<span class="kw">mod</span> <span class="ident">stack</span>;
 
 <span class="doccomment">/// A lock-free memory pool</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Pool</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">head</span>: <span class="ident">AtomicPtr</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">stack</span>: <span class="ident">Stack</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 
     <span class="comment">// Current implementation is unsound on architectures that don&#39;t have LL/SC semantics so this</span>
     <span class="comment">// struct is not `Sync` on those platforms</span>
     <span class="ident">_not_send_or_sync</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw">const</span> ()<span class="op">&gt;</span>,
 }
 
-<span class="comment">// NOTE: Here we lie about `Pool` implementing `Sync` on x86_64. This is not true but it lets us</span>
-<span class="comment">// test the `pool!` and `singleton::Pool` abstractions. We just have to be careful not to use the</span>
-<span class="comment">// pool in a multi-threaded context</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">armv7a</span>, <span class="ident">armv7r</span>, <span class="ident">armv7m</span>, <span class="ident">armv8m_main</span>, <span class="ident">test</span>))]</span>
+<span class="comment">// NOTE(any(test)) makes testing easier (no need to enable Cargo features for testing)</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(
+    <span class="ident">armv7a</span>,
+    <span class="ident">armv7r</span>,
+    <span class="ident">armv7m</span>,
+    <span class="ident">armv8m_main</span>,
+    <span class="ident">all</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;x86-sync-pool&quot;</span>),
+    <span class="ident">test</span>
+))]</span>
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">Pool</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
 
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">Pool</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
@@ -781,7 +921,7 @@
     <span class="doccomment">/// Creates a new empty pool</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">Pool</span> {
-            <span class="ident">head</span>: <span class="ident">AtomicPtr</span>::<span class="ident">new</span>(<span class="ident">ptr</span>::<span class="ident">null_mut</span>()),
+            <span class="ident">stack</span>: <span class="ident">Stack</span>::<span class="ident">new</span>(),
 
             <span class="ident">_not_send_or_sync</span>: <span class="ident">PhantomData</span>,
         }
@@ -793,7 +933,14 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// *NOTE:* This method does *not* have bounded execution time because it contains a CAS loop</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">alloc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Uninit</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">node</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">pop</span>() {
+        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Box</span> {
+                <span class="ident">node</span>: <span class="ident">Ptr</span>::<span class="ident">dangling</span>(),
+                <span class="ident">_state</span>: <span class="ident">PhantomData</span>,
+            });
+        }
+
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">node</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">try_pop</span>() {
             <span class="prelude-val">Some</span>(<span class="ident">Box</span> {
                 <span class="ident">node</span>,
                 <span class="ident">_state</span>: <span class="ident">PhantomData</span>,
@@ -818,7 +965,12 @@
             }
         }
 
-        <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">value</span>.<span class="ident">node</span>)
+        <span class="comment">// no operation</span>
+        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="kw">return</span>;
+        }
+
+        <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">push</span>(<span class="ident">value</span>.<span class="ident">node</span>)
     }
 
     <span class="doccomment">/// Increases the capacity of the pool</span>
@@ -827,12 +979,17 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method returns the number of *new* blocks that can be allocated.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">grow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">memory</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+        <span class="kw">let</span> <span class="ident">sz</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+
+        <span class="kw">if</span> <span class="ident">sz</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="comment">// SZT use no memory so a pool of SZT always has maximum capacity</span>
+            <span class="kw">return</span> <span class="ident">usize</span>::<span class="ident">max_value</span>();
+        }
+
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">memory</span>.<span class="ident">as_mut_ptr</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">memory</span>.<span class="ident">len</span>();
 
         <span class="kw">let</span> <span class="ident">align</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="kw">let</span> <span class="ident">sz</span> <span class="op">=</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-
         <span class="kw">let</span> <span class="ident">rem</span> <span class="op">=</span> (<span class="ident">p</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">align</span>;
         <span class="kw">if</span> <span class="ident">rem</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
             <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">align</span> <span class="op">-</span> <span class="ident">rem</span>;
@@ -848,7 +1005,19 @@
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">n</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">while</span> <span class="ident">len</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">sz</span> {
-            <span class="self">self</span>.<span class="ident">push</span>(<span class="kw">unsafe</span> { <span class="ident">NonNull</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>) });
+            <span class="kw">match</span> () {
+                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
+                () <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">Ptr</span>::<span class="ident">new</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>) {
+                        <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">push</span>(<span class="ident">p</span>);
+                    }
+                }
+
+                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>))]</span>
+                () <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">push</span>(<span class="kw">unsafe</span> { <span class="ident">Ptr</span>::<span class="ident">new_unchecked</span>(<span class="ident">p</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>) });
+                }
+            }
             <span class="ident">n</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
 
             <span class="ident">p</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">p</span>.<span class="ident">add</span>(<span class="ident">sz</span>) };
@@ -866,71 +1035,33 @@
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">AsMutSlice</span><span class="op">&lt;</span><span class="ident">Element</span> <span class="op">=</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
+        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="kw">return</span> <span class="ident">usize</span>::<span class="ident">max_value</span>();
+        }
+
         <span class="kw">let</span> <span class="ident">nodes</span> <span class="op">=</span> <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="ident">memory</span>.<span class="ident">as_mut_ptr</span>()).<span class="ident">as_mut_slice</span>() };
         <span class="kw">let</span> <span class="ident">cap</span> <span class="op">=</span> <span class="ident">nodes</span>.<span class="ident">len</span>();
         <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="ident">nodes</span> {
-            <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">NonNull</span>::<span class="ident">from</span>(<span class="ident">p</span>))
+            <span class="kw">match</span> () {
+                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
+                () <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">Ptr</span>::<span class="ident">new</span>(<span class="ident">p</span>) {
+                        <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">push</span>(<span class="ident">p</span>);
+                    }
+                }
+
+                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>))]</span>
+                () <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">stack</span>.<span class="ident">push</span>(<span class="ident">core</span>::<span class="ident">ptr</span>::<span class="ident">NonNull</span>::<span class="ident">from</span>(<span class="ident">p</span>)),
+            }
         }
         <span class="ident">cap</span>
     }
-
-    <span class="kw">fn</span> <span class="ident">pop</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="comment">// NOTE `Ordering`s come from crossbeam&#39;s (v0.6.0) `TreiberStack`</span>
-
-        <span class="kw">loop</span> {
-            <span class="kw">let</span> <span class="ident">head</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">head</span>.<span class="ident">load</span>(<span class="ident">Ordering</span>::<span class="ident">Acquire</span>);
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">nn_head</span>) <span class="op">=</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">head</span>) {
-                <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="kw">unsafe</span> { (<span class="kw-2">*</span><span class="ident">head</span>).<span class="ident">next</span> };
-
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">head</span>.<span class="ident">compare_exchange_weak</span>(
-                    <span class="ident">head</span>,
-                    <span class="ident">next</span>,
-                    <span class="ident">Ordering</span>::<span class="ident">Release</span>, <span class="comment">// success</span>
-                    <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>, <span class="comment">// failure</span>
-                ) {
-                    <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span> <span class="prelude-val">Some</span>(<span class="ident">nn_head</span>),
-                    <span class="comment">// interrupt occurred or other core made a successful STREX op on the head</span>
-                    <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">continue</span>,
-                }
-            } <span class="kw">else</span> {
-                <span class="comment">// stack is observed as empty</span>
-                <span class="kw">break</span> <span class="prelude-val">None</span>;
-            }
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">new_head</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
-        <span class="comment">// NOTE `Ordering`s come from crossbeam&#39;s (v0.6.0) `TreiberStack`</span>
-
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">head</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">head</span>.<span class="ident">load</span>(<span class="ident">Ordering</span>::<span class="ident">Relaxed</span>);
-        <span class="kw">loop</span> {
-            <span class="kw">unsafe</span> { <span class="ident">new_head</span>.<span class="ident">as_mut</span>().<span class="ident">next</span> <span class="op">=</span> <span class="ident">head</span> }
-
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">head</span>.<span class="ident">compare_exchange_weak</span>(
-                <span class="ident">head</span>,
-                <span class="ident">new_head</span>.<span class="ident">as_ptr</span>(),
-                <span class="ident">Ordering</span>::<span class="ident">Release</span>, <span class="comment">// success</span>
-                <span class="ident">Ordering</span>::<span class="ident">Relaxed</span>, <span class="comment">// failure</span>
-            ) {
-                <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span>,
-                <span class="comment">// interrupt occurred or other core made a successful STREX op on the head</span>
-                <span class="prelude-val">Err</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">head</span> <span class="op">=</span> <span class="ident">p</span>,
-            }
-        }
-    }
-}
-
-<span class="doccomment">/// Unfortunate implementation detail required to use the</span>
-<span class="doccomment">/// [`Pool.grow_exact`](struct.Pool.html#method.grow_exact) method</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">data</span>: <span class="ident">UnsafeCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">next</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 }
 
 <span class="doccomment">/// A memory block</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">STATE</span> <span class="op">=</span> <span class="ident">Init</span><span class="op">&gt;</span> {
     <span class="ident">_state</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">STATE</span><span class="op">&gt;</span>,
-    <span class="ident">node</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">node</span>: <span class="ident">Ptr</span><span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Uninit</span><span class="op">&gt;</span> {
@@ -956,6 +1087,8 @@
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Send</span> {}
 
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">Sync</span> {}
+
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">stable_deref_trait</span>::<span class="ident">StableDeref</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">AsSlice</span> <span class="kw">for</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -1093,7 +1226,8 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">sanity</span>() {
-        <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">MEMORY</span>: [<span class="ident">u8</span>; <span class="number">31</span>] <span class="op">=</span> [<span class="number">0</span>; <span class="number">31</span>];
+        <span class="kw">const</span> <span class="ident">SZ</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">2</span> <span class="op">*</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">Node</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>() <span class="op">-</span> <span class="number">1</span>;
+        <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">MEMORY</span>: [<span class="ident">u8</span>; <span class="ident">SZ</span>] <span class="op">=</span> [<span class="number">0</span>; <span class="ident">SZ</span>];
 
         <span class="kw">static</span> <span class="ident">POOL</span>: <span class="ident">Pool</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Pool</span>::<span class="ident">new</span>();
 
