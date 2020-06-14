@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Ресурсы - Real Time For the Masses</title>
+        <title>Ресурсы - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html" class="active"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html" class="active"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,7 +110,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
@@ -153,7 +153,7 @@
 прерываний не всегда необходимо для безопасности памяти, но компилятор не имеет
 достаточно информации, чтобы оптимизировать доступ к разделяемым данным.</p>
 <p>Атрибут <code>app</code> имеет полную картину приложения, поэтому может оптимизировать доступ к
-<code>static</code>-переменным. В RTFM мы обращаемся к <code>static</code>-переменным, объявленным внутри
+<code>static</code>-переменным. В RTIC мы обращаемся к <code>static</code>-переменным, объявленным внутри
 псевдо-модуля <code>app</code> как к <em>ресурсам</em>. Чтобы получить доступ к ресурсу, контекст
 (<code>init</code>, <code>idle</code>, <code>interrupt</code> или <code>exception</code>) должен сначала определить
 аргумент <code>resources</code> в соответствующем атрибуте.</p>
@@ -175,7 +175,7 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         // A resource
@@ -185,8 +185,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
     }
 
     // `shared` cannot be accessed from this context
@@ -238,14 +238,14 @@ UART1: shared = 2
 критические секции используются, но <em>только где необходимы</em>: например,
 критические секции не нужны для обработчика с наивысшим приоритетом, имеющим
 доступ к ресурсу.</p>
-<p>API критической секции, предоставляемое фреймворком RTFM (см. <a href="../../../api/rtfm/trait.Mutex.html"><code>Mutex</code></a>),
+<p>API критической секции, предоставляемое фреймворком RTIC (см. <a href="../../../api/rtic/trait.Mutex.html"><code>Mutex</code></a>),
 основано на динамических приоритетах вместо отключения прерываний. Из этого следует,
 что критические секции не будут допускать <em>запуск некоторых</em> обработчиков,
 включая все соперничающие за ресурс, но будут позволять запуск обработчиков с
 большим приоритетом не соперничащих за ресурс.</p>
 <p>В примере ниже у нас есть 3 обработчика прерываний с приоритетами от одного
 до трех. Два обработчика с низким приоритетом соперничают за ресурс <code>SHARED</code>.
-Обработчик с низшим приоритетом должен заблокировать (<a href="../../../api/rtfm/trait.Mutex.html#method.lock"><code>lock</code></a>) ресурс
+Обработчик с низшим приоритетом должен заблокировать (<a href="../../../api/rtic/trait.Mutex.html#method.lock"><code>lock</code></a>) ресурс
 <code>SHARED</code>, чтобы получить доступ к его данным, в то время как обработчик со
 средним приоритетом может напрямую получать доступ к его данным. Обработчик
 с наивысшим приоритетом может свободно вытеснять критическую секцию,
@@ -264,7 +264,7 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -273,7 +273,7 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::GPIOA);
+        rtic::pend(Interrupt::GPIOA);
     }
 
     // when omitted priority is assumed to be `1`
@@ -287,12 +287,12 @@ const APP: () = {
             *shared += 1;
 
             // GPIOB will *not* run right now due to the critical section
-            rtfm::pend(Interrupt::GPIOB);
+            rtic::pend(Interrupt::GPIOB);
 
             hprintln!(&quot;B - shared = {}&quot;, *shared).unwrap();
 
             // GPIOC does not contend for `shared` so it's allowed to run now
-            rtfm::pend(Interrupt::GPIOC);
+            rtic::pend(Interrupt::GPIOC);
         });
 
         // critical section is over: GPIOB can now start
@@ -358,7 +358,7 @@ use heapless::{
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     // Late resources
     struct Resources {
@@ -384,7 +384,7 @@ const APP: () = {
 
                 debug::exit(debug::EXIT_SUCCESS);
             } else {
-                rtfm::pend(Interrupt::UART0);
+                rtic::pend(Interrupt::UART0);
             }
         }
     }

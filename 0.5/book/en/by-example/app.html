@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The app attribute - Real Time For the Masses</title>
+        <title>The app attribute - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="../by-example/app.html" class="active"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">4.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">5.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="../by-example/app.html" class="active"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="../internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,11 +110,15 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
                             </a>
                             
                         </div>
@@ -146,7 +150,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
-<p>This is the smallest possible RTFM application:</p>
+<p>This is the smallest possible RTIC application:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -156,13 +160,13 @@
 #![no_std]
 
 use panic_semihosting as _; // panic handler
-use rtfm::app;
+use rtic::app;
 
 #[app(device = lm3s6965)]
 const APP: () = {};
 
 #}</code></pre></pre>
-<p>All RTFM applications use the <a href="../../../api/cortex_m_rtfm_macros/attr.app.html"><code>app</code></a> attribute (<code>#[app(..)]</code>). This attribute
+<p>All RTIC applications use the <a href="../../../api/cortex_m_rtic_macros/attr.app.html"><code>app</code></a> attribute (<code>#[app(..)]</code>). This attribute
 must be applied to a <code>const</code> item that contains items. The <code>app</code> attribute has
 a mandatory <code>device</code> argument that takes a <em>path</em> as a value. This path must
 point to a <em>peripheral access crate</em> (PAC) generated using <a href="https://crates.io/crates/svd2rust"><code>svd2rust</code></a>
@@ -172,7 +176,7 @@ point so it's not required to use the <a href="../../../api/cortex_m_rt_macros/a
 <p><strong>ASIDE</strong>: Some of you may be wondering why we are using a <code>const</code> item as a
 module and not a proper <code>mod</code> item. The reason is that using attributes on
 modules requires a feature gate, which requires a nightly toolchain. To make
-RTFM work on stable we use the <code>const</code> item instead. When more parts of macros
+RTIC work on stable we use the <code>const</code> item instead. When more parts of macros
 1.2 are stabilized we'll move from a <code>const</code> item to a <code>mod</code> item and
 eventually to a crate level attribute (<code>#![app]</code>).</p>
 </blockquote>
@@ -204,7 +208,7 @@ available when the <code>peripherals</code> argument is set to <code>true</code>
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965, peripherals = true)]
+#[rtic::app(device = lm3s6965, peripherals = true)]
 const APP: () = {
     #[init]
     fn init(cx: init::Context) {
@@ -256,7 +260,7 @@ references that are safe to access.</p>
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
@@ -306,13 +310,13 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
         // Pends the UART0 interrupt but its handler won't run until *after*
         // `init` returns because interrupts are disabled
-        rtfm::pend(Interrupt::UART0); // equivalent to NVIC::pend
+        rtic::pend(Interrupt::UART0); // equivalent to NVIC::pend
 
         hprintln!(&quot;init&quot;).unwrap();
     }
@@ -323,7 +327,7 @@ const APP: () = {
 
         hprintln!(&quot;idle&quot;).unwrap();
 
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
 
         debug::exit(debug::EXIT_SUCCESS);
 
@@ -353,13 +357,13 @@ UART0 called 1 time
 idle
 UART0 called 2 times
 </code></pre>
-<p>So far all the RTFM applications we have seen look no different that the
+<p>So far all the RTIC applications we have seen look no different than the
 applications one can write using only the <code>cortex-m-rt</code> crate. From this point
-we start introducing features unique to RTFM.</p>
+we start introducing features unique to RTIC.</p>
 <h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
 <p>The static priority of each handler can be declared in the <code>task</code> attribute
 using the <code>priority</code> argument. Tasks can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
-crate. When the <code>priority</code> argument is omitted the priority is assumed to be
+crate. When the <code>priority</code> argument is omitted, the priority is assumed to be
 <code>1</code>. The <code>idle</code> task has a non-configurable static priority of <code>0</code>, the lowest
 priority.</p>
 <p>When several tasks are ready to be executed the one with <em>highest</em> static
@@ -382,19 +386,19 @@ task has terminated the lower priority task is resumed.</p>
 use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
-use rtfm::app;
+use rtic::app;
 
 #[app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::GPIOA);
+        rtic::pend(Interrupt::GPIOA);
     }
 
     #[task(binds = GPIOA, priority = 1)]
     fn gpioa(_: gpioa::Context) {
         hprintln!(&quot;GPIOA - start&quot;).unwrap();
-        rtfm::pend(Interrupt::GPIOC);
+        rtic::pend(Interrupt::GPIOC);
         hprintln!(&quot;GPIOA - end&quot;).unwrap();
         debug::exit(debug::EXIT_SUCCESS);
     }
@@ -407,7 +411,7 @@ const APP: () = {
     #[task(binds = GPIOC, priority = 2)]
     fn gpioc(_: gpioc::Context) {
         hprintln!(&quot; GPIOC - start&quot;).unwrap();
-        rtfm::pend(Interrupt::GPIOB);
+        rtic::pend(Interrupt::GPIOB);
         hprintln!(&quot; GPIOC - end&quot;).unwrap();
     }
 };
@@ -422,11 +426,11 @@ GPIOA - end
 </code></pre>
 <p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
 is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of
-task <code>gpiob</code> is prioritized over <code>gpioa</code>'s due to its higher priority. <code>gpioa</code>
+task, <code>gpiob</code> is prioritized over <code>gpioa</code> due to its higher priority. <code>gpioa</code>
 is resumed only after <code>gpiob</code> terminates.</p>
 <p>One more note about priorities: choosing a priority higher than what the device
 supports (that is <code>1 &lt;&lt; NVIC_PRIO_BITS</code>) will result in a compile error. Due to
-limitations in the language the error message is currently far from helpful: it
+limitations in the language, the error message is currently far from helpful: it
 will say something along the lines of &quot;evaluation of constant value failed&quot; and
 the span of the error will <em>not</em> point out to the problematic interrupt value --
 we are sorry about this!</p>

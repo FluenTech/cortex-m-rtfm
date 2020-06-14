@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Critical sections - Real Time For the Masses</title>
+        <title>Critical sections - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html" class="active"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">4.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">5.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="../internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html" class="active"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,11 +110,15 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
                             </a>
                             
                         </div>
@@ -148,7 +152,7 @@
                         <h1><a class="header" href="#critical-sections" id="critical-sections">Critical sections</a></h1>
 <p>When a resource (static variable) is shared between two, or more, tasks that run
 at different priorities some form of mutual exclusion is required to mutate the
-memory in a data race free manner. In RTFM we use priority-based critical
+memory in a data race free manner. In RTIC we use priority-based critical
 sections to guarantee mutual exclusion (see the <a href="https://en.wikipedia.org/wiki/Priority_ceiling_protocol">Immediate Ceiling Priority
 Protocol</a>).</p>
 <p>The critical section consists of temporarily raising the <em>dynamic</em> priority of
@@ -171,7 +175,7 @@ task we give it a <em>resource proxy</em>, whereas we give a unique reference
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -242,7 +246,7 @@ pub mod bar {
 const APP: () = {
     static mut x: u64 = 0;
 
-    impl rtfm::Mutex for resources::x {
+    impl rtic::Mutex for resources::x {
         type T = u64;
 
         fn lock&lt;R&gt;(&amp;mut self, f: impl FnOnce(&amp;mut u64) -&gt; R) -&gt; R {
@@ -299,7 +303,7 @@ interrupt, or a logical <code>0</code> when the current context is <code>idle</c
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-impl rtfm::Mutex for resources::x {
+impl rtic::Mutex for resources::x {
     type T = u64;
 
     fn lock&lt;R, F&gt;(&amp;mut self, f: F) -&gt; R
@@ -359,7 +363,7 @@ provides extra information to the compiler.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -370,7 +374,7 @@ const APP: () = {
 
     #[init]
     fn init() {
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
     }
 
     #[interrupt(binds = UART0, priority = 1, resources = [x, y])]
@@ -473,7 +477,7 @@ const APP: () = {
 
     // similarly for `UART0` / `foo` and `UART2` / `baz`
 
-    impl&lt;'a&gt; rtfm::Mutex for resources::x&lt;'a&gt; {
+    impl&lt;'a&gt; rtic::Mutex for resources::x&lt;'a&gt; {
         type T = u64;
 
         fn lock&lt;R&gt;(&amp;mut self, f: impl FnOnce(&amp;mut u64) -&gt; R) -&gt; R {
@@ -552,7 +556,7 @@ fn foo(c: foo::Context) {
 }
 #}</code></pre></pre>
 <h2><a class="header" href="#the-basepri-invariant" id="the-basepri-invariant">The BASEPRI invariant</a></h2>
-<p>An invariant that the RTFM framework has to preserve is that the value of the
+<p>An invariant that the RTIC framework has to preserve is that the value of the
 BASEPRI at the start of an <em>interrupt</em> handler must be the same value it has
 when the interrupt handler returns. BASEPRI may change during the execution of
 the interrupt handler but running an interrupt handler from start to finish
@@ -562,7 +566,7 @@ handler through preemption. This is best observed in the following example:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -572,7 +576,7 @@ const APP: () = {
     #[init]
     fn init() {
         // `foo` will run right after `init` returns
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
     }
 
     #[task(binds = UART0, priority = 1)]
@@ -580,7 +584,7 @@ const APP: () = {
         // BASEPRI is `0` at this point; the dynamic priority is currently `1`
 
         // `bar` will preempt `foo` at this point
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART1);
 
         // BASEPRI is `192` at this point (due to a bug); the dynamic priority is now `2`
         // this function returns to `idle`
@@ -605,7 +609,7 @@ const APP: () = {
 
         // this has no effect due to the BASEPRI value
         // the task `foo` will never be executed again
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
 
         loop {
             // ..
@@ -620,11 +624,11 @@ const APP: () = {
 };
 #}</code></pre></pre>
 <p>IMPORTANT: let's say we <em>forget</em> to roll back <code>BASEPRI</code> in <code>UART1</code> -- this would
-be a bug in the RTFM code generator.</p>
+be a bug in the RTIC code generator.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-// code generated by RTFM
+// code generated by RTIC
 
 const APP: () = {
     // ..

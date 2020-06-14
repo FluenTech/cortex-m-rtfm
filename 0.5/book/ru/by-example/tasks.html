@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Задачи - Real Time For the Masses</title>
+        <title>Задачи - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html" class="active"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html" class="active"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,7 +110,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
@@ -146,12 +146,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#Программные-задачи" id="Программные-задачи">Программные задачи</a></h1>
-<p>RTFM обрабатывает прерывания и исключения как <em>аппаратные</em> задачи. Аппаратные
+<p>RTIC обрабатывает прерывания и исключения как <em>аппаратные</em> задачи. Аппаратные
 задачи могут вызываться устройством в ответ на события, такие как нажатие кнопки.
-RTFM также поддерживает <em>программные</em> задачи, порождаемые программой из любого
+RTIC также поддерживает <em>программные</em> задачи, порождаемые программой из любого
 контекста выполнения.</p>
 <p>Программным задачам также можно назначать приоритет и диспетчеризовать из
-обработчиков прерываний. RTFM требует определения свободных прерываний в блоке
+обработчиков прерываний. RTIC требует определения свободных прерываний в блоке
 <code>extern</code>, когда используются программные задачи; эти свободные прерывания будут использованы, чтобы диспетчеризовать программные задачи. Преимущество программных
 задач перед аппаратными в том, что  на один обработчик прерывания можно назначить
 множество задач.</p>
@@ -173,7 +173,7 @@ RTFM также поддерживает <em>программные</em> зад�
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init(spawn = [foo])]
     fn init(c: init::Context) {
@@ -243,7 +243,7 @@ bar
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init(spawn = [foo])]
     fn init(c: init::Context) {
@@ -315,11 +315,11 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
     }
 
     #[task(binds = UART0, spawn = [foo, bar])]

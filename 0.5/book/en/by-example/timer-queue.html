@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Timer queue - Real Time For the Masses</title>
+        <title>Timer queue - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html" class="active"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">4.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">5.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html" class="active"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="../internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,11 +110,15 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
                             </a>
                             
                         </div>
@@ -151,7 +155,7 @@ the scheduler, the <code>schedule</code> API can be used to schedule a task to r
 time in the future.</p>
 <p>To use the <code>schedule</code> API a monotonic timer must be first defined using the
 <code>monotonic</code> argument of the <code>#[app]</code> attribute. This argument takes a path to a
-type that implements the <a href="../../../api/rtfm/trait.Monotonic.html"><code>Monotonic</code></a> trait. The associated type, <code>Instant</code>, of
+type that implements the <a href="../../../api/rtic/trait.Monotonic.html"><code>Monotonic</code></a> trait. The associated type, <code>Instant</code>, of
 this trait represents a timestamp in arbitrary units and it's used extensively
 in the <code>schedule</code> API -- it is suggested to model this type after <a href="https://doc.rust-lang.org/std/time/struct.Instant.html">the one in
 the standard library</a>.</p>
@@ -163,7 +167,7 @@ type (see <a href="https://doc.rust-lang.org/core/time/struct.Duration.html"><co
 (SYST) clock cycles&quot; time unit. The result of the conversion must be a 32-bit
 integer. If the result of the conversion doesn't fit in a 32-bit number then the
 operation must return an error, any error type.</p>
-<p>For ARMv7+ targets the <code>rtfm</code> crate provides a <code>Monotonic</code> implementation based
+<p>For ARMv7+ targets the <code>rtic</code> crate provides a <code>Monotonic</code> implementation based
 on the built-in CYCle CouNTer (CYCCNT). Note that this is a 32-bit timer clocked
 at the frequency of the CPU and as such it is not suitable for tracking time
 spans in the order of seconds.</p>
@@ -173,7 +177,7 @@ scheduling a task the (user-defined) <code>Instant</code> at which the task shou
 executed must be passed as the first argument of the <code>schedule</code> invocation.</p>
 <p>Additionally, the chosen <code>monotonic</code> timer must be configured and initialized
 during the <code>#[init]</code> phase. Note that this is <em>also</em> the case if you choose to
-use the <code>CYCCNT</code> provided by the <code>cortex-m-rtfm</code> crate.</p>
+use the <code>CYCCNT</code> provided by the <code>cortex-m-rtic</code> crate.</p>
 <p>The example below schedules two tasks from <code>init</code>: <code>foo</code> and <code>bar</code>. <code>foo</code> is
 scheduled to run 8 million clock cycles in the future. Next, <code>bar</code> is scheduled
 to run 4 million clock cycles in the future. Thus <code>bar</code> runs before <code>foo</code> since
@@ -196,10 +200,10 @@ counter functionality has not been implemented in <code>qemu-system-arm</code>.<
 use cortex_m::peripheral::DWT;
 use cortex_m_semihosting::hprintln;
 use panic_halt as _;
-use rtfm::cyccnt::{Instant, U32Ext as _};
+use rtic::cyccnt::{Instant, U32Ext as _};
 
 // NOTE: does NOT work on QEMU!
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(schedule = [foo, bar])]
     fn init(mut cx: init::Context) {
@@ -247,7 +251,7 @@ foo  @ Instant(8000173)
 <p>When the <code>schedule</code> API is being used the runtime internally uses the <code>SysTick</code>
 interrupt handler and the system timer peripheral (<code>SYST</code>) so neither can be
 used by the application. This is accomplished by changing the type of
-<code>init::Context.core</code> from <code>cortex_m::Peripherals</code> to <code>rtfm::Peripherals</code>. The
+<code>init::Context.core</code> from <code>cortex_m::Peripherals</code> to <code>rtic::Peripherals</code>. The
 latter structure contains all the fields of the former minus the <code>SYST</code> one.</p>
 <h2><a class="header" href="#periodic-tasks" id="periodic-tasks">Periodic tasks</a></h2>
 <p>Software tasks have access to the <code>Instant</code> at which they were scheduled to run
@@ -265,18 +269,18 @@ used to implement periodic tasks as shown in the example below.</p>
 
 use cortex_m_semihosting::hprintln;
 use panic_semihosting as _;
-use rtfm::cyccnt::{Instant, U32Ext};
+use rtic::cyccnt::{Instant, U32Ext};
 
 const PERIOD: u32 = 8_000_000;
 
 // NOTE: does NOT work on QEMU!
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(schedule = [foo])]
     fn init(cx: init::Context) {
         // omitted: initialization of `CYCCNT`
 
-        cx.schedule.foo(Instant::now() + PERIOD.cycles()).unwrap();
+        cx.schedule.foo(cx.start + PERIOD.cycles()).unwrap();
     }
 
     #[task(schedule = [foo])]
@@ -332,7 +336,7 @@ use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 // NOTE: does NOT properly work on QEMU
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(spawn = [foo])]
     fn init(cx: init::Context) {
@@ -353,7 +357,7 @@ const APP: () = {
         if *ONCE {
             *ONCE = false;
 
-            rtfm::pend(Interrupt::UART0);
+            rtic::pend(Interrupt::UART0);
         } else {
             debug::exit(debug::EXIT_SUCCESS);
         }

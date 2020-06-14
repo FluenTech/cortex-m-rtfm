@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Атрибут app - Real Time For the Masses</title>
+        <title>Атрибут app - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html" class="active"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html" class="active"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,7 +110,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
@@ -146,7 +146,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
-<p>Это наименьшая возможная программа на RTFM:</p>
+<p>Это наименьшая возможная программа на RTIC:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -156,13 +156,13 @@
 #![no_std]
 
 use panic_semihosting as _; // panic handler
-use rtfm::app;
+use rtic::app;
 
 #[app(device = lm3s6965)]
 const APP: () = {};
 
 #}</code></pre></pre>
-<p>Все программы на RTFM используют атрибут <a href="../../../api/cortex_m_rtfm_macros/attr.app.html"><code>app</code></a> (<code>#[app(..)]</code>). Этот атрибут
+<p>Все программы на RTIC используют атрибут <a href="../../../api/cortex_m_rtic_macros/attr.app.html"><code>app</code></a> (<code>#[app(..)]</code>). Этот атрибут
 нужно применять к <code>const</code>-элементам, содержащим элементы. Атрибут <code>app</code> имеет
 обязательный аргумент <code>device</code>, в качестве значения которому передается <em>путь</em>.
 Этот путь должен указывать на библиотеку <em>устройства</em>, сгенерированную с помощью
@@ -172,7 +172,7 @@ const APP: () = {};
 <p><strong>ОТСТУПЛЕНИЕ</strong>: Некоторые из вас удивятся, почему мы используем ключевое слово <code>const</code> как
 модуль, а не правильное <code>mod</code>. Причина в том, что использование атрибутов на
 модулях требует feature gate, который требует ночную сборку. Чтобы заставить
-RTFM работать на стабильной сборке, мы используем вместо него слово <code>const</code>.
+RTIC работать на стабильной сборке, мы используем вместо него слово <code>const</code>.
 Когда большая часть макросов 1.2 стабилизируются, мы прейдем от <code>const</code> к <code>mod</code> и в конце концов в атрибуту уровне приложения (<code>#![app]</code>).</p>
 </blockquote>
 <h2><a class="header" href="#init" id="init"><code>init</code></a></h2>
@@ -182,8 +182,8 @@ RTFM работать на стабильной сборке, мы исполь�
 Функция <code>init</code> запустится <em>с отключенными прерываниями</em> и будет иметь эксклюзивный
 доступ к периферии Cortex-M и специфичной для устройства периферии через переменные
 <code>core</code> and <code>device</code>, которые внедряются в область видимости <code>init</code> атрибутом <code>app</code>.
-Не вся периферия Cortex-M доступна в <code>core</code>, потому что рантайм RTFM принимает владение
-частью из неё -- более подробно см. структуру <a href="../../api/rtfm/struct.Peripherals.html"><code>rtfm::Peripherals</code></a>.</p>
+Не вся периферия Cortex-M доступна в <code>core</code>, потому что рантайм RTIC принимает владение
+частью из неё -- более подробно см. структуру <a href="../../api/rtic/struct.Peripherals.html"><code>rtic::Peripherals</code></a>.</p>
 <p>Переменные <code>static mut</code>, определённые в начале <code>init</code> будут преобразованы
 в ссылки <code>&amp;'static mut</code> с безопасным доступом.</p>
 <p>Пример ниже показывает типы переменных <code>core</code> и <code>device</code> и
@@ -201,7 +201,7 @@ RTFM работать на стабильной сборке, мы исполь�
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965, peripherals = true)]
+#[rtic::app(device = lm3s6965, peripherals = true)]
 const APP: () = {
     #[init]
     fn init(cx: init::Context) {
@@ -252,7 +252,7 @@ init
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
@@ -282,7 +282,7 @@ idle
 <h2><a class="header" href="#interrupt--exception" id="interrupt--exception"><code>interrupt</code> / <code>exception</code></a></h2>
 <p>Как Вы бы сделали с помощью библиотеки <code>cortex-m-rt</code>, Вы можете использовать атрибуты
 <code>interrupt</code> и <code>exception</code> внутри псевдо-модуля <code>app</code>, чтобы определить обработчики
-прерываний и исключений. В RTFM, мы называем обработчики прерываний и исключений
+прерываний и исключений. В RTIC, мы называем обработчики прерываний и исключений
 <em>аппаратными</em> задачами.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -292,9 +292,9 @@ idle
 <pre><code class="language-console">$ cargo run --example interrupt
 {{#include ../../../../ci/expected/interrupt.run}}```
 
-До сих пор программы RTFM, которые мы видели не отличались от программ, которые
+До сих пор программы RTIC, которые мы видели не отличались от программ, которые
 можно написать, используя только библиотеку `cortex-m-rt`. В следующем разделе
-мы начнем знакомиться с функционалом, присущим только RTFM.
+мы начнем знакомиться с функционалом, присущим только RTIC.
 </code></pre>
 
                     </main>

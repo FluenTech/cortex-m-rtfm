@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Under the hood - Real Time For the Masses</title>
+        <title>Under the hood - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="internals.html" class="active"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li><li><a href="homogeneous.html"><strong aria-hidden="true">4.</strong> Homogeneous multi-core support</a></li><li><a href="heterogeneous.html"><strong aria-hidden="true">5.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="internals.html" class="active"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,11 +110,15 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
                             </a>
                             
                         </div>
@@ -146,7 +150,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#under-the-hood" id="under-the-hood">Under the hood</a></h1>
-<p>This section describes the internals of the RTFM framework at a <em>high level</em>.
+<p>This section describes the internals of the RTIC framework at a <em>high level</em>.
 Low level details like the parsing and code generation done by the procedural
 macro (<code>#[app]</code>) will not be explained here. The focus will be the analysis of
 the user specification and the data structures used by the runtime.</p>
@@ -158,7 +162,7 @@ before you dive into this material.</p>
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="migration.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="migration_rtic.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
@@ -176,7 +180,7 @@ before you dive into this material.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="migration.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="migration_rtic.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 

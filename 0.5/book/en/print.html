@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Real Time For the Masses</title>
+        <title>Real-Time Interrupt-driven Concurrency</title>
         
         <meta name="robots" content="noindex" />
         
@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li><li><a href="homogeneous.html"><strong aria-hidden="true">4.</strong> Homogeneous multi-core support</a></li><li><a href="heterogeneous.html"><strong aria-hidden="true">5.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -112,11 +112,15 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
                             </a>
                             
                         </div>
@@ -147,13 +151,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 align="center">Real Time For the Masses</h1>
+                        <h1 align="center">Real-Time Interrupt-driven Concurrency</h1>
 <p align="center">A concurrency framework for building real time systems</p>
 <h1><a class="header" href="#preface" id="preface">Preface</a></h1>
-<p>This book contains user level documentation for the Real Time For the Masses
-(RTFM) framework. The API reference can be found <a href="../../api/">here</a>.</p>
+<p>This book contains user level documentation for the Real-Time Interrupt-driven Concurrency
+(RTIC) framework. The API reference can be found <a href="../../api/">here</a>.</p>
+<p>Formerly known as Real-Time For the Masses.</p>
 <p>There is a translation of this book in <a href="../ru/index.html">Russian</a>.</p>
-<p>This is the documentation of v0.5.x of RTFM; for the documentation of version
+<p>This is the documentation of v0.5.x of RTIC; for the documentation of version
 v0.4.x go <a href="/0.4">here</a>.</p>
 <h2><a class="header" href="#features" id="features">Features</a></h2>
 <ul>
@@ -211,11 +216,11 @@ friendly tooling for that.)</p>
 </li>
 </ul>
 <h2><a class="header" href="#chat" id="chat">Chat</a></h2>
-<p>Join us and talk about RTFM in the <a href="https://matrix.to/#/#rtfm-rs:matrix.org">Matrix room</a>.</p>
+<p>Join us and talk about RTIC in the <a href="https://matrix.to/#/#rtic:matrix.org">Matrix room</a>.</p>
 <h2><a class="header" href="#contributing" id="contributing">Contributing</a></h2>
-<p>New features and big changes should go through the RFC process in the <a href="https://github.com/rtfm-rs/rfcs">dedicated RFC repository</a>.</p>
+<p>New features and big changes should go through the RFC process in the <a href="https://github.com/rtic-rs/rfcs">dedicated RFC repository</a>.</p>
 <h2><a class="header" href="#acknowledgments" id="acknowledgments">Acknowledgments</a></h2>
-<p>This crate is based on <a href="http://www.rtfm-lang.org/">the RTFM language</a> created by the Embedded
+<p>This crate is based on <a href="http://www.rtfm-lang.org/">the Real-Time For the Masses language</a> created by the Embedded
 Systems group at <a href="https://www.ltu.se/?l=en">Luleå University of Technology</a>, led by <a href="https://www.ltu.se/staff/p/pln-1.11258?l=en">Prof. Per
 Lindgren</a>.</p>
 <h2><a class="header" href="#references" id="references">References</a></h2>
@@ -246,17 +251,17 @@ Creative Commons CC-BY-SA v4.0 license (<a href="LICENSE-CC-BY-SA">LICENSE-CC-BY
 <p>Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 licensed as above, without any additional terms or conditions.</p>
-<h1><a class="header" href="#rtfm-by-example" id="rtfm-by-example">RTFM by example</a></h1>
-<p>This part of the book introduces the Real Time For the Masses (RTFM) framework
+<h1><a class="header" href="#rtic-by-example" id="rtic-by-example">RTIC by example</a></h1>
+<p>This part of the book introduces the Real-Time Interrupt-driven Concurrency (RTIC) framework
 to new users by walking them through examples of increasing complexity.</p>
-<p>All examples in this part of the book can be found in the GitHub <a href="https://github.com/rtfm-rs/cortex-m-rtfm">repository</a> of
+<p>All examples in this part of the book can be found in the GitHub <a href="https://github.com/rtic-rs/cortex-m-rtic">repository</a> of
 the project, and most of the examples can be run on QEMU so no special hardware
 is required to follow along.</p>
 <p>To run the examples on your laptop / PC you'll need the <code>qemu-system-arm</code>
 program. Check <a href="https://rust-embedded.github.io/book/intro/install.html">the embedded Rust book</a> for instructions on how to set up an
 embedded development environment that includes QEMU.</p>
 <h1><a class="header" href="#the-app-attribute" id="the-app-attribute">The <code>app</code> attribute</a></h1>
-<p>This is the smallest possible RTFM application:</p>
+<p>This is the smallest possible RTIC application:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -266,13 +271,13 @@ embedded development environment that includes QEMU.</p>
 #![no_std]
 
 use panic_semihosting as _; // panic handler
-use rtfm::app;
+use rtic::app;
 
 #[app(device = lm3s6965)]
 const APP: () = {};
 
 #}</code></pre></pre>
-<p>All RTFM applications use the <a href="by-example/../../../api/cortex_m_rtfm_macros/attr.app.html"><code>app</code></a> attribute (<code>#[app(..)]</code>). This attribute
+<p>All RTIC applications use the <a href="by-example/../../../api/cortex_m_rtic_macros/attr.app.html"><code>app</code></a> attribute (<code>#[app(..)]</code>). This attribute
 must be applied to a <code>const</code> item that contains items. The <code>app</code> attribute has
 a mandatory <code>device</code> argument that takes a <em>path</em> as a value. This path must
 point to a <em>peripheral access crate</em> (PAC) generated using <a href="https://crates.io/crates/svd2rust"><code>svd2rust</code></a>
@@ -282,7 +287,7 @@ point so it's not required to use the <a href="by-example/../../../api/cortex_m_
 <p><strong>ASIDE</strong>: Some of you may be wondering why we are using a <code>const</code> item as a
 module and not a proper <code>mod</code> item. The reason is that using attributes on
 modules requires a feature gate, which requires a nightly toolchain. To make
-RTFM work on stable we use the <code>const</code> item instead. When more parts of macros
+RTIC work on stable we use the <code>const</code> item instead. When more parts of macros
 1.2 are stabilized we'll move from a <code>const</code> item to a <code>mod</code> item and
 eventually to a crate level attribute (<code>#![app]</code>).</p>
 </blockquote>
@@ -314,7 +319,7 @@ available when the <code>peripherals</code> argument is set to <code>true</code>
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965, peripherals = true)]
+#[rtic::app(device = lm3s6965, peripherals = true)]
 const APP: () = {
     #[init]
     fn init(cx: init::Context) {
@@ -366,7 +371,7 @@ references that are safe to access.</p>
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
@@ -416,13 +421,13 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
         // Pends the UART0 interrupt but its handler won't run until *after*
         // `init` returns because interrupts are disabled
-        rtfm::pend(Interrupt::UART0); // equivalent to NVIC::pend
+        rtic::pend(Interrupt::UART0); // equivalent to NVIC::pend
 
         hprintln!(&quot;init&quot;).unwrap();
     }
@@ -433,7 +438,7 @@ const APP: () = {
 
         hprintln!(&quot;idle&quot;).unwrap();
 
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
 
         debug::exit(debug::EXIT_SUCCESS);
 
@@ -463,13 +468,13 @@ UART0 called 1 time
 idle
 UART0 called 2 times
 </code></pre>
-<p>So far all the RTFM applications we have seen look no different that the
+<p>So far all the RTIC applications we have seen look no different than the
 applications one can write using only the <code>cortex-m-rt</code> crate. From this point
-we start introducing features unique to RTFM.</p>
+we start introducing features unique to RTIC.</p>
 <h2><a class="header" href="#priorities" id="priorities">Priorities</a></h2>
 <p>The static priority of each handler can be declared in the <code>task</code> attribute
 using the <code>priority</code> argument. Tasks can have priorities in the range <code>1..=(1 &lt;&lt; NVIC_PRIO_BITS)</code> where <code>NVIC_PRIO_BITS</code> is a constant defined in the <code>device</code>
-crate. When the <code>priority</code> argument is omitted the priority is assumed to be
+crate. When the <code>priority</code> argument is omitted, the priority is assumed to be
 <code>1</code>. The <code>idle</code> task has a non-configurable static priority of <code>0</code>, the lowest
 priority.</p>
 <p>When several tasks are ready to be executed the one with <em>highest</em> static
@@ -492,19 +497,19 @@ task has terminated the lower priority task is resumed.</p>
 use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
-use rtfm::app;
+use rtic::app;
 
 #[app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::GPIOA);
+        rtic::pend(Interrupt::GPIOA);
     }
 
     #[task(binds = GPIOA, priority = 1)]
     fn gpioa(_: gpioa::Context) {
         hprintln!(&quot;GPIOA - start&quot;).unwrap();
-        rtfm::pend(Interrupt::GPIOC);
+        rtic::pend(Interrupt::GPIOC);
         hprintln!(&quot;GPIOA - end&quot;).unwrap();
         debug::exit(debug::EXIT_SUCCESS);
     }
@@ -517,7 +522,7 @@ const APP: () = {
     #[task(binds = GPIOC, priority = 2)]
     fn gpioc(_: gpioc::Context) {
         hprintln!(&quot; GPIOC - start&quot;).unwrap();
-        rtfm::pend(Interrupt::GPIOB);
+        rtic::pend(Interrupt::GPIOB);
         hprintln!(&quot; GPIOC - end&quot;).unwrap();
     }
 };
@@ -532,11 +537,11 @@ GPIOA - end
 </code></pre>
 <p>Note that the task <code>gpiob</code> does <em>not</em> preempt task <code>gpioc</code> because its priority
 is the <em>same</em> as <code>gpioc</code>'s. However, once <code>gpioc</code> terminates the execution of
-task <code>gpiob</code> is prioritized over <code>gpioa</code>'s due to its higher priority. <code>gpioa</code>
+task, <code>gpiob</code> is prioritized over <code>gpioa</code> due to its higher priority. <code>gpioa</code>
 is resumed only after <code>gpiob</code> terminates.</p>
 <p>One more note about priorities: choosing a priority higher than what the device
 supports (that is <code>1 &lt;&lt; NVIC_PRIO_BITS</code>) will result in a compile error. Due to
-limitations in the language the error message is currently far from helpful: it
+limitations in the language, the error message is currently far from helpful: it
 will say something along the lines of &quot;evaluation of constant value failed&quot; and
 the span of the error will <em>not</em> point out to the problematic interrupt value --
 we are sorry about this!</p>
@@ -550,7 +555,7 @@ can access which resource.</p>
 pseudo-module. Each field in the structure corresponds to a different resource.
 Resources can optionally be given an initial value using the <code>#[init]</code>
 attribute. Resources that are not given an initial value are referred to as
-<em>late</em> resources and are covered in more detail in a follow up section in this
+<em>late</em> resources and are covered in more detail in a follow-up section in this
 page.</p>
 <p>Each context (task handler, <code>init</code> or <code>idle</code>) must declare the resources it
 intends to access in its corresponding metadata attribute using the <code>resources</code>
@@ -573,7 +578,7 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         // A resource
@@ -583,8 +588,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
     }
 
     // `shared` cannot be accessed from this context
@@ -621,7 +626,7 @@ const APP: () = {
 UART0: shared = 1
 UART1: shared = 2
 </code></pre>
-<p>Note that the <code>shared</code> resource cannot accessed from <code>idle</code>. Attempting to do
+<p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
 so results in a compile error.</p>
 <h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
 <p>In the presence of preemption critical sections are required to mutate shared
@@ -630,7 +635,7 @@ the priorities of tasks and which tasks can access which resources it enforces
 that critical sections are used where required for memory safety.</p>
 <p>Where a critical section is required the framework hands out a resource proxy
 instead of a reference. This resource proxy is a structure that implements the
-<a href="by-example/../../../api/rtfm/trait.Mutex.html"><code>Mutex</code></a> trait. The only method on this trait, <a href="by-example/../../../api/rtfm/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure
+<a href="by-example/../../../api/rtic/trait.Mutex.html"><code>Mutex</code></a> trait. The only method on this trait, <a href="by-example/../../../api/rtic/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure
 argument in a critical section.</p>
 <p>The critical section created by the <code>lock</code> API is based on dynamic priorities:
 it temporarily raises the dynamic priority of the context to a <em>ceiling</em>
@@ -658,7 +663,7 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -667,7 +672,7 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::GPIOA);
+        rtic::pend(Interrupt::GPIOA);
     }
 
     // when omitted priority is assumed to be `1`
@@ -681,12 +686,12 @@ const APP: () = {
             *shared += 1;
 
             // GPIOB will *not* run right now due to the critical section
-            rtfm::pend(Interrupt::GPIOB);
+            rtic::pend(Interrupt::GPIOB);
 
             hprintln!(&quot;B - shared = {}&quot;, *shared).unwrap();
 
             // GPIOC does not contend for `shared` so it's allowed to run now
-            rtfm::pend(Interrupt::GPIOC);
+            rtic::pend(Interrupt::GPIOC);
         });
 
         // critical section is over: GPIOB can now start
@@ -719,12 +724,12 @@ D - shared = 2
 E
 </code></pre>
 <h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
-<p>Late resources are resources that are not given an initial value at compile
-using the <code>#[init]</code> attribute but instead are initialized are runtime using the
+<p>Late resources are resources that are not given an initial value at compile time
+using the <code>#[init]</code> attribute but instead are initialized at runtime using the
 <code>init::LateResources</code> values returned by the <code>init</code> function.</p>
 <p>Late resources are useful for <em>moving</em> (as in transferring the ownership of)
 peripherals initialized in <code>init</code> into interrupt handlers.</p>
-<p>The example below uses late resources to stablish a lockless, one-way channel
+<p>The example below uses late resources to establish a lockless, one-way channel
 between the <code>UART0</code> interrupt handler and the <code>idle</code> task. A single producer
 single consumer <a href="by-example/../../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into
 consumer and producer end points in <code>init</code> and then each end point is stored
@@ -749,7 +754,7 @@ use heapless::{
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     // Late resources
     struct Resources {
@@ -775,7 +780,7 @@ const APP: () = {
 
                 debug::exit(debug::EXIT_SUCCESS);
             } else {
-                rtfm::pend(Interrupt::UART0);
+                rtic::pend(Interrupt::UART0);
             }
         }
     }
@@ -801,7 +806,7 @@ tasks running at different priorities. The downside is that the task only gets a
 shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform
 on it, but where a shared reference is enough this approach reduces the number
 of required locks.</p>
-<p>Note that in this release of RTFM it is not possible to request both exclusive
+<p>Note that in this release of RTIC it is not possible to request both exclusive
 access (<code>&amp;mut-</code>) and shared access (<code>&amp;-</code>) to the <em>same</em> resource from different
 tasks. Attempting to do so will result in a compile error.</p>
 <p>In the example below a key (e.g. a cryptographic key) is loaded (or created) at
@@ -821,7 +826,7 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         key: u32,
@@ -829,8 +834,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
 
         init::LateResources { key: 0xdeadbeef }
     }
@@ -856,10 +861,10 @@ UART0(key = 0xdeadbeef)
 </code></pre>
 <h1><a class="header" href="#software-tasks" id="software-tasks">Software tasks</a></h1>
 <p>In addition to hardware tasks, which are invoked by the hardware in response to
-hardware events, RTFM also supports <em>software</em> tasks which can be spawned by the
+hardware events, RTIC also supports <em>software</em> tasks which can be spawned by the
 application from any execution context.</p>
 <p>Software tasks can also be assigned priorities and, under the hood, are
-dispatched from interrupt handlers. RTFM requires that free interrupts are
+dispatched from interrupt handlers. RTIC requires that free interrupts are
 declared in an <code>extern</code> block when using software tasks; some of these free
 interrupts will be used to dispatch the software tasks. An advantage of software
 tasks over hardware tasks is that many tasks can be mapped to a single interrupt
@@ -883,7 +888,7 @@ priorities. The three software tasks are mapped to 2 interrupts handlers.</p>
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init(spawn = [foo])]
     fn init(c: init::Context) {
@@ -953,7 +958,7 @@ the signature of the task handler.</p>
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init(spawn = [foo])]
     fn init(c: init::Context) {
@@ -1003,7 +1008,7 @@ bar(1)
 baz(2, 3)
 </code></pre>
 <h2><a class="header" href="#capacity" id="capacity">Capacity</a></h2>
-<p>RTFM does <em>not</em> perform any form of heap-based memory allocation. The memory
+<p>RTIC does <em>not</em> perform any form of heap-based memory allocation. The memory
 required to store messages is statically reserved. By default the framework
 minimizes the memory footprint of the application so each task has a message
 &quot;capacity&quot; of 1: meaning that at most one message can be posted to the task
@@ -1027,11 +1032,11 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
     }
 
     #[task(binds = UART0, spawn = [foo, bar])]
@@ -1099,7 +1104,7 @@ following snippet:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(..)]
+#[rtic::app(..)]
 const APP: () = {
     #[init(spawn = [foo, bar])]
     fn init(cx: init::Context) {
@@ -1129,7 +1134,7 @@ the scheduler, the <code>schedule</code> API can be used to schedule a task to r
 time in the future.</p>
 <p>To use the <code>schedule</code> API a monotonic timer must be first defined using the
 <code>monotonic</code> argument of the <code>#[app]</code> attribute. This argument takes a path to a
-type that implements the <a href="by-example/../../../api/rtfm/trait.Monotonic.html"><code>Monotonic</code></a> trait. The associated type, <code>Instant</code>, of
+type that implements the <a href="by-example/../../../api/rtic/trait.Monotonic.html"><code>Monotonic</code></a> trait. The associated type, <code>Instant</code>, of
 this trait represents a timestamp in arbitrary units and it's used extensively
 in the <code>schedule</code> API -- it is suggested to model this type after <a href="https://doc.rust-lang.org/std/time/struct.Instant.html">the one in
 the standard library</a>.</p>
@@ -1141,7 +1146,7 @@ type (see <a href="https://doc.rust-lang.org/core/time/struct.Duration.html"><co
 (SYST) clock cycles&quot; time unit. The result of the conversion must be a 32-bit
 integer. If the result of the conversion doesn't fit in a 32-bit number then the
 operation must return an error, any error type.</p>
-<p>For ARMv7+ targets the <code>rtfm</code> crate provides a <code>Monotonic</code> implementation based
+<p>For ARMv7+ targets the <code>rtic</code> crate provides a <code>Monotonic</code> implementation based
 on the built-in CYCle CouNTer (CYCCNT). Note that this is a 32-bit timer clocked
 at the frequency of the CPU and as such it is not suitable for tracking time
 spans in the order of seconds.</p>
@@ -1151,7 +1156,7 @@ scheduling a task the (user-defined) <code>Instant</code> at which the task shou
 executed must be passed as the first argument of the <code>schedule</code> invocation.</p>
 <p>Additionally, the chosen <code>monotonic</code> timer must be configured and initialized
 during the <code>#[init]</code> phase. Note that this is <em>also</em> the case if you choose to
-use the <code>CYCCNT</code> provided by the <code>cortex-m-rtfm</code> crate.</p>
+use the <code>CYCCNT</code> provided by the <code>cortex-m-rtic</code> crate.</p>
 <p>The example below schedules two tasks from <code>init</code>: <code>foo</code> and <code>bar</code>. <code>foo</code> is
 scheduled to run 8 million clock cycles in the future. Next, <code>bar</code> is scheduled
 to run 4 million clock cycles in the future. Thus <code>bar</code> runs before <code>foo</code> since
@@ -1174,10 +1179,10 @@ counter functionality has not been implemented in <code>qemu-system-arm</code>.<
 use cortex_m::peripheral::DWT;
 use cortex_m_semihosting::hprintln;
 use panic_halt as _;
-use rtfm::cyccnt::{Instant, U32Ext as _};
+use rtic::cyccnt::{Instant, U32Ext as _};
 
 // NOTE: does NOT work on QEMU!
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(schedule = [foo, bar])]
     fn init(mut cx: init::Context) {
@@ -1225,7 +1230,7 @@ foo  @ Instant(8000173)
 <p>When the <code>schedule</code> API is being used the runtime internally uses the <code>SysTick</code>
 interrupt handler and the system timer peripheral (<code>SYST</code>) so neither can be
 used by the application. This is accomplished by changing the type of
-<code>init::Context.core</code> from <code>cortex_m::Peripherals</code> to <code>rtfm::Peripherals</code>. The
+<code>init::Context.core</code> from <code>cortex_m::Peripherals</code> to <code>rtic::Peripherals</code>. The
 latter structure contains all the fields of the former minus the <code>SYST</code> one.</p>
 <h2><a class="header" href="#periodic-tasks" id="periodic-tasks">Periodic tasks</a></h2>
 <p>Software tasks have access to the <code>Instant</code> at which they were scheduled to run
@@ -1243,18 +1248,18 @@ used to implement periodic tasks as shown in the example below.</p>
 
 use cortex_m_semihosting::hprintln;
 use panic_semihosting as _;
-use rtfm::cyccnt::{Instant, U32Ext};
+use rtic::cyccnt::{Instant, U32Ext};
 
 const PERIOD: u32 = 8_000_000;
 
 // NOTE: does NOT work on QEMU!
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(schedule = [foo])]
     fn init(cx: init::Context) {
         // omitted: initialization of `CYCCNT`
 
-        cx.schedule.foo(Instant::now() + PERIOD.cycles()).unwrap();
+        cx.schedule.foo(cx.start + PERIOD.cycles()).unwrap();
     }
 
     #[task(schedule = [foo])]
@@ -1310,7 +1315,7 @@ use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 // NOTE: does NOT properly work on QEMU
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(spawn = [foo])]
     fn init(cx: init::Context) {
@@ -1331,7 +1336,7 @@ const APP: () = {
         if *ONCE {
             *ONCE = false;
 
-            rtfm::pend(Interrupt::UART0);
+            rtic::pend(Interrupt::UART0);
         } else {
             debug::exit(debug::EXIT_SUCCESS);
         }
@@ -1378,9 +1383,9 @@ in the documentation you'll find <code>Context</code> structs (e.g. <code>init::
 
 use cortex_m_semihosting::debug;
 use panic_semihosting as _;
-use rtfm::cyccnt;
+use rtic::cyccnt;
 
-#[rtfm::app(device = lm3s6965, peripherals = true, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, peripherals = true, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -1390,7 +1395,7 @@ const APP: () = {
     #[init(schedule = [foo], spawn = [foo])]
     fn init(cx: init::Context) {
         let _: cyccnt::Instant = cx.start;
-        let _: rtfm::Peripherals = cx.core;
+        let _: rtic::Peripherals = cx.core;
         let _: lm3s6965::Peripherals = cx.device;
         let _: init::Schedule = cx.schedule;
         let _: init::Spawn = cx.spawn;
@@ -1431,7 +1436,7 @@ const APP: () = {
 #}</code></pre></pre>
 <h2><a class="header" href="#send" id="send"><code>Send</code></a></h2>
 <p><a href="https://doc.rust-lang.org/core/marker/trait.Send.html"><code>Send</code></a> is a marker trait for &quot;types that can be transferred across thread
-boundaries&quot;, according to its definition in <code>core</code>. In the context of RTFM the
+boundaries&quot;, according to its definition in <code>core</code>. In the context of RTIC the
 <code>Send</code> trait is only required where it's possible to transfer a value between
 tasks that run at <em>different</em> priorities. This occurs in a few places: in
 message passing, in shared resources and in the initialization of late
@@ -1456,7 +1461,7 @@ use core::marker::PhantomData;
 
 use cortex_m_semihosting::debug;
 use panic_halt as _;
-use rtfm::app;
+use rtic::app;
 
 pub struct NotSend {
     _0: PhantomData&lt;*const ()&gt;,
@@ -1529,7 +1534,7 @@ the <code>Send</code> trait.</p>
 use cortex_m_semihosting::debug;
 use lm3s6965::Interrupt;
 use panic_halt as _;
-use rtfm::app;
+use rtic::app;
 
 pub struct MustBeSend;
 
@@ -1546,7 +1551,7 @@ const APP: () = {
         let message = MustBeSend;
         *c.resources.shared = Some(message);
 
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -1564,7 +1569,7 @@ const APP: () = {
 <h2><a class="header" href="#sync" id="sync"><code>Sync</code></a></h2>
 <p>Similarly, <a href="https://doc.rust-lang.org/core/marker/trait.Sync.html"><code>Sync</code></a> is a marker trait for &quot;types for which it is safe to share
 references between threads&quot;, according to its definition in <code>core</code>. In the
-context of RTFM the <code>Sync</code> trait is only required where it's possible for two,
+context of RTIC the <code>Sync</code> trait is only required where it's possible for two,
 or more, tasks that run at different priorities and may get a shared reference
 (<code>&amp;-</code>) to a resource. This only occurs with shared access (<code>&amp;-</code>) resources.</p>
 <p>The <code>app</code> attribute will enforce that <code>Sync</code> is implemented where required but
@@ -1590,7 +1595,7 @@ pub struct NotSync {
     _0: PhantomData&lt;*const ()&gt;,
 }
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[init(NotSync { _0: PhantomData })]
@@ -1619,7 +1624,7 @@ const APP: () = {
 
 #}</code></pre></pre>
 <h1><a class="header" href="#starting-a-new-project" id="starting-a-new-project">Starting a new project</a></h1>
-<p>Now that you have learned about the main features of the RTFM framework you can
+<p>Now that you have learned about the main features of the RTIC framework you can
 try it out on your hardware by following these instructions.</p>
 <ol>
 <li>Instantiate the <a href="https://github.com/rust-embedded/cortex-m-quickstart#cortex-m-quickstart"><code>cortex-m-quickstart</code></a> template.</li>
@@ -1645,16 +1650,16 @@ device so <code>memory.x</code> and <code>build.rs</code> need to be removed.</p
 $ rm memory.x build.rs
 </code></pre>
 <ol start="3">
-<li>Add the <code>cortex-m-rtfm</code> crate as a dependency.</li>
+<li>Add the <code>cortex-m-rtic</code> crate as a dependency.</li>
 </ol>
-<pre><code class="language-console">$ cargo add cortex-m-rtfm --allow-prerelease
+<pre><code class="language-console">$ cargo add cortex-m-rtic --allow-prerelease
 </code></pre>
 <ol start="4">
-<li>Write your RTFM application.</li>
+<li>Write your RTIC application.</li>
 </ol>
-<p>Here I'll use the <code>init</code> example from the <code>cortex-m-rtfm</code> crate.</p>
+<p>Here I'll use the <code>init</code> example from the <code>cortex-m-rtic</code> crate.</p>
 <pre><code class="language-console">$ curl \
-    -L https://github.com/rtfm-rs/cortex-m-rtfm/raw/v0.5.0/examples/init.rs \
+    -L https://github.com/rtic-rs/cortex-m-rtic/raw/v0.5.0/examples/init.rs \
     &gt; src/main.rs
 </code></pre>
 <p>That example depends on the <code>panic-semihosting</code> crate:</p>
@@ -1674,9 +1679,9 @@ init
 appear as <em>different</em> types in different contexts one cannot refactor a common
 operation that uses resources into a plain function; however, such refactor is
 possible using <em>generics</em>.</p>
-<p>All resource proxies implement the <code>rtfm::Mutex</code> trait. On the other hand,
+<p>All resource proxies implement the <code>rtic::Mutex</code> trait. On the other hand,
 unique references (<code>&amp;mut-</code>) do <em>not</em> implement this trait (due to limitations in
-the trait system) but one can wrap these references in the <a href="by-example/../../../api/rtfm/struct.Exclusive.html"><code>rtfm::Exclusive</code></a>
+the trait system) but one can wrap these references in the <a href="by-example/../../../api/rtic/struct.Exclusive.html"><code>rtic::Exclusive</code></a>
 newtype which does implement the <code>Mutex</code> trait. With the help of this newtype
 one can write a generic function that operates on generic resources and call it
 from different tasks to perform some operation on the same set of resources.
@@ -1694,9 +1699,9 @@ Here's one such example:</p>
 use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
-use rtfm::{Exclusive, Mutex};
+use rtic::{Exclusive, Mutex};
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -1705,8 +1710,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -1718,7 +1723,7 @@ const APP: () = {
         // second argument has type `resources::shared`
         advance(STATE, c.resources.shared);
 
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART1);
 
         debug::exit(debug::EXIT_SUCCESS);
     }
@@ -1783,7 +1788,7 @@ use cortex_m_semihosting::debug;
 use cortex_m_semihosting::hprintln;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[cfg(debug_assertions)] // &lt;- `true` when using the `dev` profile
@@ -1844,8 +1849,8 @@ foo has been called 1 time
 foo has been called 2 times
 </code></pre>
 <h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
-<p>The main goal of moving the specification of RTFM applications to attributes in
-RTFM v0.4.0 was to allow inter-operation with other attributes. For example, the
+<p>The main goal of moving the specification of RTIC applications to attributes in
+RTIC v0.4.0 was to allow inter-operation with other attributes. For example, the
 <code>link_section</code> attribute can be applied to tasks to place them in RAM; this can
 improve performance in some cases.</p>
 <blockquote>
@@ -1872,7 +1877,7 @@ adding a <code>ramfunc</code> attribute in a future release.</p>
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init(spawn = [bar])]
     fn init(c: init::Context) {
@@ -1945,7 +1950,7 @@ use heapless::{
 };
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
-use rtfm::app;
+use rtic::app;
 
 // Declare a pool of 128-byte memory blocks
 pool!(P: [u8; 128]);
@@ -1959,7 +1964,7 @@ const APP: () = {
         // Increase the capacity of the memory pool by ~4
         P::grow(MEMORY);
 
-        rtfm::pend(Interrupt::I2C0);
+        rtic::pend(Interrupt::I2C0);
     }
 
     #[task(binds = I2C0, priority = 2, spawn = [foo, bar])]
@@ -2004,19 +2009,19 @@ bar(0x2000008c)
 foo(0x20000110)
 </code></pre>
 <h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
-<p><code>#[rtfm::app]</code> is a procedural macro that produces support code. If for some
+<p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some
 reason you need to inspect the code generated by this macro you have two
 options:</p>
-<p>You can inspect the file <code>rtfm-expansion.rs</code> inside the <code>target</code> directory. This
-file contains the expansion of the <code>#[rtfm::app]</code> item (not your whole program!)
-of the <em>last built</em> (via <code>cargo build</code> or <code>cargo check</code>) RTFM application. The
+<p>You can inspect the file <code>rtic-expansion.rs</code> inside the <code>target</code> directory. This
+file contains the expansion of the <code>#[rtic::app]</code> item (not your whole program!)
+of the <em>last built</em> (via <code>cargo build</code> or <code>cargo check</code>) RTIC application. The
 expanded code is not pretty printed by default so you'll want to run <code>rustfmt</code>
 over it before you read it.</p>
 <pre><code class="language-console">$ cargo build --example foo
 
-$ rustfmt target/rtfm-expansion.rs
+$ rustfmt target/rtic-expansion.rs
 
-$ tail target/rtfm-expansion.rs
+$ tail target/rtic-expansion.rs
 </code></pre>
 <pre><pre class="playpen"><code class="language-rust">#[doc = r&quot; Implementation details&quot;]
 const APP: () = {
@@ -2024,18 +2029,18 @@ const APP: () = {
     use lm3s6965 as _;
     #[no_mangle]
     unsafe extern &quot;C&quot; fn main() -&gt; ! {
-        rtfm::export::interrupt::disable();
-        let mut core: rtfm::export::Peripherals = core::mem::transmute(());
+        rtic::export::interrupt::disable();
+        let mut core: rtic::export::Peripherals = core::mem::transmute(());
         core.SCB.scr.modify(|r| r | 1 &lt;&lt; 1);
-        rtfm::export::interrupt::enable();
+        rtic::export::interrupt::enable();
         loop {
-            rtfm::export::wfi()
+            rtic::export::wfi()
         }
     }
 };
 </code></pre></pre>
 <p>Or, you can use the <a href="https://crates.io/crates/cargo-expand"><code>cargo-expand</code></a> subcommand. This subcommand will expand
-<em>all</em> the macros, including the <code>#[rtfm::app]</code> attribute, and modules in your
+<em>all</em> the macros, including the <code>#[rtic::app]</code> attribute, and modules in your
 crate and print the output to the console.</p>
 <pre><code class="language-console">$ # produces the same output as before
 $ cargo expand --example smallest | tail
@@ -2057,7 +2062,7 @@ use cortex_m_semihosting::hprintln;
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         // Some resources to work with
@@ -2071,8 +2076,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
     }
 
     // Direct destructure
@@ -2096,12 +2101,12 @@ const APP: () = {
 
 #}</code></pre></pre>
 <h1><a class="header" href="#migrating-from-v04x-to-v050" id="migrating-from-v04x-to-v050">Migrating from v0.4.x to v0.5.0</a></h1>
-<p>This section covers how to upgrade an application written against RTFM v0.4.x to
+<p>This section covers how to upgrade an application written against RTIC v0.4.x to
 the version v0.5.0 of the framework.</p>
 <h2><a class="header" href="#cargotoml" id="cargotoml"><code>Cargo.toml</code></a></h2>
-<p>First, the version of the <code>cortex-m-rtfm</code> dependency needs to be updated to
+<p>First, the version of the <code>cortex-m-rtic</code> dependency needs to be updated to
 <code>&quot;0.5.0&quot;</code>. The <code>timer-queue</code> feature needs to be removed.</p>
-<pre><code class="language-toml">[dependencies.cortex-m-rtfm]
+<pre><code class="language-toml">[dependencies.cortex-m-rtic]
 # change this
 version = &quot;0.4.3&quot;
 
@@ -2113,16 +2118,16 @@ features = [&quot;timer-queue&quot;]
 #           ^^^^^^^^^^^^^
 </code></pre>
 <h2><a class="header" href="#context-argument" id="context-argument"><code>Context</code> argument</a></h2>
-<p>All functions inside the <code>#[rtfm::app]</code> item need to take as first argument a
+<p>All functions inside the <code>#[rtic::app]</code> item need to take as first argument a
 <code>Context</code> structure. This <code>Context</code> type will contain the variables that were
 magically injected into the scope of the function by version v0.4.x of the
 framework: <code>resources</code>, <code>spawn</code>, <code>schedule</code> -- these variables will become
-fields of the <code>Context</code> structure. Each function within the <code>#[rtfm::app]</code> item
+fields of the <code>Context</code> structure. Each function within the <code>#[rtic::app]</code> item
 gets a different <code>Context</code> type.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     // change this
     #[task(resources = [x], spawn = [a], schedule = [b])]
@@ -2169,7 +2174,7 @@ variables to a <code>struct Resources</code>.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     // change this
     static mut X: u32 = 0;
@@ -2189,13 +2194,13 @@ const APP: () = {
 <h2><a class="header" href="#device-peripherals" id="device-peripherals">Device peripherals</a></h2>
 <p>If your application was accessing the device peripherals in <code>#[init]</code> through
 the <code>device</code> variable then you'll need to add <code>peripherals = true</code> to the
-<code>#[rtfm::app]</code> attribute to continue to access the device peripherals through
+<code>#[rtic::app]</code> attribute to continue to access the device peripherals through
 the <code>device</code> field of the <code>init::Context</code> structure.</p>
 <p>Change this:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     #[init]
     fn init() {
@@ -2209,7 +2214,7 @@ const APP: () = {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */, peripherals = true)]
+#[rtic::app(/* .. */, peripherals = true)]
 //                    ^^^^^^^^^^^^^^^^^^
 const APP: () = {
     #[init]
@@ -2229,7 +2234,7 @@ hardware tasks in v0.5.x use the <code>#[task]</code> attribute with the <code>b
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     // hardware tasks
     #[exception]
@@ -2249,7 +2254,7 @@ const APP: () = {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     #[task(binds = SVCall)]
     //     ^^^^^^^^^^^^^^
@@ -2269,11 +2274,11 @@ const APP: () = {
 <h2><a class="header" href="#schedule" id="schedule"><code>schedule</code></a></h2>
 <p>The <code>timer-queue</code> feature has been removed. To use the <code>schedule</code> API one must
 first define the monotonic timer the runtime will use using the <code>monotonic</code>
-argument of the <code>#[rtfm::app]</code> attribute. To continue using the cycle counter
+argument of the <code>#[rtic::app]</code> attribute. To continue using the cycle counter
 (CYCCNT) as the monotonic timer, and match the behavior of version v0.4.x, add
-the <code>monotonic = rtfm::cyccnt::CYCCNT</code> argument to the <code>#[rtfm::app]</code> attribute.</p>
+the <code>monotonic = rtic::cyccnt::CYCCNT</code> argument to the <code>#[rtic::app]</code> attribute.</p>
 <p>Also, the <code>Duration</code> and <code>Instant</code> types and the <code>U32Ext</code> trait have been moved
-into the <code>rtfm::cyccnt</code> module. This module is only available on ARMv7-M+
+into the <code>rtic::cyccnt</code> module. This module is only available on ARMv7-M+
 devices. The removal of the <code>timer-queue</code> also brings back the <code>DWT</code> peripheral
 inside the core peripherals struct, this will need to be enabled by the application
 inside <code>init</code>. </p>
@@ -2281,9 +2286,9 @@ inside <code>init</code>. </p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-use rtfm::{Duration, Instant, U32Ext};
+use rtic::{Duration, Instant, U32Ext};
 
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     #[task(schedule = [b])]
     fn a() {
@@ -2295,10 +2300,10 @@ const APP: () = {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-use rtfm::cyccnt::{Duration, Instant, U32Ext};
+use rtic::cyccnt::{Duration, Instant, U32Ext};
 //        ^^^^^^^^
 
-#[rtfm::app(/* .. */, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(/* .. */, monotonic = rtic::cyccnt::CYCCNT)]
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 const APP: () = {
     #[init]
@@ -2313,26 +2318,67 @@ const APP: () = {
     }
 };
 #}</code></pre></pre>
+<h1><a class="header" href="#migrating-from-rtfm-to-rtic" id="migrating-from-rtfm-to-rtic">Migrating from RTFM to RTIC</a></h1>
+<p>This section covers how to upgrade an application written against RTFM v0.5.x to
+the same version of RTIC. This applies since the renaming of the framework as per <a href="https://github.com/rtic-rs/rfcs/pull/33">RFC #33</a>.</p>
+<p><strong>Note:</strong> There are no code differences between RTFM v0.5.3 and RTIC v0.5.3, it is purely a name
+change.</p>
+<h2><a class="header" href="#cargotoml-1" id="cargotoml-1"><code>Cargo.toml</code></a></h2>
+<p>First, the <code>cortex-m-rtfm</code> dependency needs to be updated to
+<code>cortex-m-rtic</code>.</p>
+<pre><code class="language-toml">[dependencies]
+# change this
+cortex-m-rtfm = &quot;0.5.3&quot;
+
+# into this
+cortex-m-rtic = &quot;0.5.3&quot;
+</code></pre>
+<h2><a class="header" href="#code-changes" id="code-changes">Code changes</a></h2>
+<p>The only code change that needs to be made is that any reference to <code>rtfm</code> before now need to point
+to <code>rtic</code> as follows:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+//
+// Change this
+//
+
+#[rtfm::app(/* .. */, monotonic = rtfm::cyccnt::CYCCNT)]
+const APP: () = {
+    // ...
+
+};
+
+//
+// Into this
+//
+
+#[rtic::app(/* .. */, monotonic = rtic::cyccnt::CYCCNT)]
+const APP: () = {
+    // ...
+
+};
+#}</code></pre></pre>
 <h1><a class="header" href="#under-the-hood" id="under-the-hood">Under the hood</a></h1>
-<p>This section describes the internals of the RTFM framework at a <em>high level</em>.
+<p>This section describes the internals of the RTIC framework at a <em>high level</em>.
 Low level details like the parsing and code generation done by the procedural
 macro (<code>#[app]</code>) will not be explained here. The focus will be the analysis of
 the user specification and the data structures used by the runtime.</p>
 <p>We highly suggest that you read the embedonomicon section on <a href="https://github.com/rust-embedded/embedonomicon/pull/48">concurrency</a>
 before you dive into this material.</p>
 <h1><a class="header" href="#interrupt-configuration" id="interrupt-configuration">Interrupt configuration</a></h1>
-<p>Interrupts are core to the operation of RTFM applications. Correctly setting
+<p>Interrupts are core to the operation of RTIC applications. Correctly setting
 interrupt priorities and ensuring they remain fixed at runtime is a requisite
 for the memory safety of the application.</p>
-<p>The RTFM framework exposes interrupt priorities as something that is declared at
+<p>The RTIC framework exposes interrupt priorities as something that is declared at
 compile time. However, this static configuration must be programmed into the
 relevant registers during the initialization of the application. The interrupt
 configuration is done before the <code>init</code> function runs.</p>
-<p>This example gives you an idea of the code that the RTFM framework runs:</p>
+<p>This example gives you an idea of the code that the RTIC framework runs:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(c: init::Context) {
@@ -2389,7 +2435,7 @@ unsafe fn main() -&gt; ! {
 }
 </code></pre></pre>
 <h1><a class="header" href="#non-reentrancy" id="non-reentrancy">Non-reentrancy</a></h1>
-<p>In RTFM, tasks handlers are <em>not</em> reentrant. Reentering a task handler can break
+<p>In RTIC, tasks handlers are <em>not</em> reentrant. Reentering a task handler can break
 Rust aliasing rules and lead to <em>undefined behavior</em>. A task handler can be
 reentered in one of two ways: in software or by hardware.</p>
 <h2><a class="header" href="#in-software" id="in-software">In software</a></h2>
@@ -2399,7 +2445,7 @@ are discouraged from directly invoking an interrupt handler.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     #[init]
     fn init(c: init::Context) { .. }
@@ -2429,7 +2475,7 @@ const APP: () = {
     }
 };
 #}</code></pre></pre>
-<p>The RTFM framework must generate the interrupt handler code that calls the user
+<p>The RTIC framework must generate the interrupt handler code that calls the user
 defined task handlers. We are careful in making these handlers impossible to
 call from user code.</p>
 <p>The above example expands into:</p>
@@ -2461,10 +2507,10 @@ const APP: () = {
 <h2><a class="header" href="#by-hardware" id="by-hardware">By hardware</a></h2>
 <p>A task handler can also be reentered without software intervention. This can
 occur if the same handler is assigned to two or more interrupts in the vector
-table but there's no syntax for this kind of configuration in the RTFM
+table but there's no syntax for this kind of configuration in the RTIC
 framework.</p>
 <h1><a class="header" href="#access-control" id="access-control">Access control</a></h1>
-<p>One of the core foundations of RTFM is access control. Controlling which parts
+<p>One of the core foundations of RTIC is access control. Controlling which parts
 of the program can access which static variables is instrumental to enforcing
 memory safety.</p>
 <p>Static variables are used to share state between interrupt handlers, or between
@@ -2474,8 +2520,8 @@ static variable because static variables can be accessed from any function that
 resides in the same scope in which they are declared. Modules give some control
 over how a static variable can be accessed by they are not flexible enough.</p>
 <p>To achieve the fine-grained access control where tasks can only access the
-static variables (resources) that they have specified in their RTFM attribute
-the RTFM framework performs a source code level transformation. This
+static variables (resources) that they have specified in their RTIC attribute
+the RTIC framework performs a source code level transformation. This
 transformation consists of placing the resources (static variables) specified by
 the user <em>inside</em> a <code>const</code> item and the user code <em>outside</em> the <code>const</code> item.
 This makes it impossible for the user code to refer to these static variables.</p>
@@ -2489,7 +2535,7 @@ happens behind the scenes:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     static mut X: u64: 0;
     static mut Y: bool: 0;
@@ -2624,7 +2670,7 @@ initialize late resources.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     struct Resources {
         x: Thing,
@@ -2727,7 +2773,7 @@ memory barrier in single-core context.</p>
 <h1><a class="header" href="#critical-sections" id="critical-sections">Critical sections</a></h1>
 <p>When a resource (static variable) is shared between two, or more, tasks that run
 at different priorities some form of mutual exclusion is required to mutate the
-memory in a data race free manner. In RTFM we use priority-based critical
+memory in a data race free manner. In RTIC we use priority-based critical
 sections to guarantee mutual exclusion (see the <a href="https://en.wikipedia.org/wiki/Priority_ceiling_protocol">Immediate Ceiling Priority
 Protocol</a>).</p>
 <p>The critical section consists of temporarily raising the <em>dynamic</em> priority of
@@ -2750,7 +2796,7 @@ task we give it a <em>resource proxy</em>, whereas we give a unique reference
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -2821,7 +2867,7 @@ pub mod bar {
 const APP: () = {
     static mut x: u64 = 0;
 
-    impl rtfm::Mutex for resources::x {
+    impl rtic::Mutex for resources::x {
         type T = u64;
 
         fn lock&lt;R&gt;(&amp;mut self, f: impl FnOnce(&amp;mut u64) -&gt; R) -&gt; R {
@@ -2878,7 +2924,7 @@ interrupt, or a logical <code>0</code> when the current context is <code>idle</c
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-impl rtfm::Mutex for resources::x {
+impl rtic::Mutex for resources::x {
     type T = u64;
 
     fn lock&lt;R, F&gt;(&amp;mut self, f: F) -&gt; R
@@ -2938,7 +2984,7 @@ provides extra information to the compiler.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -2949,7 +2995,7 @@ const APP: () = {
 
     #[init]
     fn init() {
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
     }
 
     #[interrupt(binds = UART0, priority = 1, resources = [x, y])]
@@ -3052,7 +3098,7 @@ const APP: () = {
 
     // similarly for `UART0` / `foo` and `UART2` / `baz`
 
-    impl&lt;'a&gt; rtfm::Mutex for resources::x&lt;'a&gt; {
+    impl&lt;'a&gt; rtic::Mutex for resources::x&lt;'a&gt; {
         type T = u64;
 
         fn lock&lt;R&gt;(&amp;mut self, f: impl FnOnce(&amp;mut u64) -&gt; R) -&gt; R {
@@ -3131,7 +3177,7 @@ fn foo(c: foo::Context) {
 }
 #}</code></pre></pre>
 <h2><a class="header" href="#the-basepri-invariant" id="the-basepri-invariant">The BASEPRI invariant</a></h2>
-<p>An invariant that the RTFM framework has to preserve is that the value of the
+<p>An invariant that the RTIC framework has to preserve is that the value of the
 BASEPRI at the start of an <em>interrupt</em> handler must be the same value it has
 when the interrupt handler returns. BASEPRI may change during the execution of
 the interrupt handler but running an interrupt handler from start to finish
@@ -3141,7 +3187,7 @@ handler through preemption. This is best observed in the following example:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -3151,7 +3197,7 @@ const APP: () = {
     #[init]
     fn init() {
         // `foo` will run right after `init` returns
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
     }
 
     #[task(binds = UART0, priority = 1)]
@@ -3159,7 +3205,7 @@ const APP: () = {
         // BASEPRI is `0` at this point; the dynamic priority is currently `1`
 
         // `bar` will preempt `foo` at this point
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART1);
 
         // BASEPRI is `192` at this point (due to a bug); the dynamic priority is now `2`
         // this function returns to `idle`
@@ -3184,7 +3230,7 @@ const APP: () = {
 
         // this has no effect due to the BASEPRI value
         // the task `foo` will never be executed again
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
 
         loop {
             // ..
@@ -3199,11 +3245,11 @@ const APP: () = {
 };
 #}</code></pre></pre>
 <p>IMPORTANT: let's say we <em>forget</em> to roll back <code>BASEPRI</code> in <code>UART1</code> -- this would
-be a bug in the RTFM code generator.</p>
+be a bug in the RTIC code generator.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-// code generated by RTFM
+// code generated by RTIC
 
 const APP: () = {
     // ..
@@ -3235,9 +3281,9 @@ run.</p>
 <h1><a class="header" href="#ceiling-analysis" id="ceiling-analysis">Ceiling analysis</a></h1>
 <p>A resource <em>priority ceiling</em>, or just <em>ceiling</em>, is the dynamic priority that
 any task must have to safely access the resource memory. Ceiling analysis is
-relatively simple but critical to the memory safety of RTFM applications.</p>
+relatively simple but critical to the memory safety of RTIC applications.</p>
 <p>To compute the ceiling of a resource we must first collect a list of tasks that
-have access to the resource -- as the RTFM framework enforces access control to
+have access to the resource -- as the RTIC framework enforces access control to
 resources at compile time it also has access to this information at compile
 time. The ceiling of the resource is simply the highest logical priority among
 those tasks.</p>
@@ -3257,7 +3303,7 @@ gets a unique reference (<code>&amp;mut-</code>) to resources.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     struct Resources {
         // accessed by `foo` (prio = 1) and `bar` (prio = 2)
@@ -3313,7 +3359,7 @@ const APP: () = {
 };
 #}</code></pre></pre>
 <h1><a class="header" href="#software-tasks-1" id="software-tasks-1">Software tasks</a></h1>
-<p>RTFM supports software tasks and hardware tasks. Each hardware task is bound to
+<p>RTIC supports software tasks and hardware tasks. Each hardware task is bound to
 a different interrupt handler. On the other hand, several software tasks may be
 dispatched by the same interrupt handler -- this is done to minimize the number
 of interrupts handlers used by the framework.</p>
@@ -3336,7 +3382,7 @@ Consider this example:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     // ..
 
@@ -3490,7 +3536,7 @@ const APP: () = {
                         });
 
                         // pend the interrupt that runs the task dispatcher
-                        rtfm::pend(Interrupt::UART0);
+                        rtic::pend(Interrupt::UART0);
                     }
 
                     None =&gt; {
@@ -3557,7 +3603,7 @@ const APP: () = {
                         });
 
                         // pend the interrupt that runs the task dispatcher
-                        rtfm::pend(Interrupt::UART0);
+                        rtic::pend(Interrupt::UART0);
                     }
 
                     None =&gt; {
@@ -3617,7 +3663,7 @@ in the <code>INPUTS</code> buffer we use a SPSC queue; this lets us reduce the n
 critical sections. In fact, thanks to this choice the task dispatching code is
 lock-free.</p>
 <h2><a class="header" href="#queue-capacity" id="queue-capacity">Queue capacity</a></h2>
-<p>The RTFM framework uses several queues like ready queues and free queues. When
+<p>The RTIC framework uses several queues like ready queues and free queues. When
 the free queue is empty trying to <code>spawn</code> a task results in an error; this
 condition is checked at runtime. Not all the operations performed by the
 framework on these queues check if the queue is empty / full. For example,
@@ -3653,7 +3699,7 @@ endpoint is owned by a task dispatcher.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     #[idle(spawn = [foo, bar])]
     fn idle(c: idle::Context) -&gt; ! {
@@ -3708,7 +3754,7 @@ appropriate ready queue.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     // ..
 
@@ -3743,7 +3789,7 @@ mod foo {
 }
 
 const APP: () = {
-    type Instant = &lt;path::to::user::monotonic::timer as rtfm::Monotonic&gt;::Instant;
+    type Instant = &lt;path::to::user::monotonic::timer as rtic::Monotonic&gt;::Instant;
 
     // all tasks that can be `schedule`-d
     enum T {
@@ -3833,7 +3879,7 @@ const APP: () = {
                     });
 
                     // pend the task dispatcher
-                    rtfm::pend(Interrupt::UART0);
+                    rtic::pend(Interrupt::UART0);
                 }
             }
         }
@@ -3848,7 +3894,7 @@ way it will run at the right priority.</p>
 handler; basically, <code>enqueue_unchecked</code> delegates the task of setting up a new
 timeout interrupt to the <code>SysTick</code> handler.</p>
 <h2><a class="header" href="#resolution-and-range-of-cyccntinstant-and-cyccntduration" id="resolution-and-range-of-cyccntinstant-and-cyccntduration">Resolution and range of <code>cyccnt::Instant</code> and <code>cyccnt::Duration</code></a></h2>
-<p>RTFM provides a <code>Monotonic</code> implementation based on the <code>DWT</code>'s (Data Watchpoint
+<p>RTIC provides a <code>Monotonic</code> implementation based on the <code>DWT</code>'s (Data Watchpoint
 and Trace) cycle counter. <code>Instant::now</code> returns a snapshot of this timer; these
 DWT snapshots (<code>Instant</code>s) are used to sort entries in the timer queue. The
 cycle counter is a 32-bit counter clocked at the core clock frequency. This
@@ -3899,7 +3945,7 @@ analysis.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(device = ..)]
+#[rtic::app(device = ..)]
 const APP: () = {
     #[task(priority = 3, spawn = [baz])]
     fn foo(c: foo::Context) {
@@ -4037,7 +4083,7 @@ const APP: () = {
                             });
                         });
 
-                        rtfm::pend(Interrupt::UART0);
+                        rtic::pend(Interrupt::UART0);
                     }
 
                     None =&gt; {
@@ -4052,11 +4098,11 @@ const APP: () = {
 #}</code></pre></pre>
 <h1><a class="header" href="#homogeneous-multi-core-support" id="homogeneous-multi-core-support">Homogeneous multi-core support</a></h1>
 <p>This section covers the <em>experimental</em> homogeneous multi-core support provided
-by RTFM behind the <code>homogeneous</code> Cargo feature.</p>
+by RTIC behind the <code>homogeneous</code> Cargo feature.</p>
 <p><strong>Content coming soon</strong></p>
 <h1><a class="header" href="#heterogeneous-multi-core-support" id="heterogeneous-multi-core-support">Heterogeneous multi-core support</a></h1>
 <p>This section covers the <em>experimental</em> heterogeneous multi-core support provided
-by RTFM behind the <code>heterogeneous</code> Cargo feature.</p>
+by RTIC behind the <code>heterogeneous</code> Cargo feature.</p>
 <p><strong>Content coming soon</strong></p>
 
                     </main>

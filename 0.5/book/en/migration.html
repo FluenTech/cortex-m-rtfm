@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Migrating from v0.4.x to v0.5.0 - Real Time For the Masses</title>
+        <title>Migrating from v0.4.x to v0.5.0 - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html" class="active"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li><li><a href="homogeneous.html"><strong aria-hidden="true">4.</strong> Homogeneous multi-core support</a></li><li><a href="heterogeneous.html"><strong aria-hidden="true">5.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="migration.html" class="active"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,11 +110,15 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
                             </a>
                             
                         </div>
@@ -146,12 +150,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#migrating-from-v04x-to-v050" id="migrating-from-v04x-to-v050">Migrating from v0.4.x to v0.5.0</a></h1>
-<p>This section covers how to upgrade an application written against RTFM v0.4.x to
+<p>This section covers how to upgrade an application written against RTIC v0.4.x to
 the version v0.5.0 of the framework.</p>
 <h2><a class="header" href="#cargotoml" id="cargotoml"><code>Cargo.toml</code></a></h2>
-<p>First, the version of the <code>cortex-m-rtfm</code> dependency needs to be updated to
+<p>First, the version of the <code>cortex-m-rtic</code> dependency needs to be updated to
 <code>&quot;0.5.0&quot;</code>. The <code>timer-queue</code> feature needs to be removed.</p>
-<pre><code class="language-toml">[dependencies.cortex-m-rtfm]
+<pre><code class="language-toml">[dependencies.cortex-m-rtic]
 # change this
 version = &quot;0.4.3&quot;
 
@@ -163,16 +167,16 @@ features = [&quot;timer-queue&quot;]
 #           ^^^^^^^^^^^^^
 </code></pre>
 <h2><a class="header" href="#context-argument" id="context-argument"><code>Context</code> argument</a></h2>
-<p>All functions inside the <code>#[rtfm::app]</code> item need to take as first argument a
+<p>All functions inside the <code>#[rtic::app]</code> item need to take as first argument a
 <code>Context</code> structure. This <code>Context</code> type will contain the variables that were
 magically injected into the scope of the function by version v0.4.x of the
 framework: <code>resources</code>, <code>spawn</code>, <code>schedule</code> -- these variables will become
-fields of the <code>Context</code> structure. Each function within the <code>#[rtfm::app]</code> item
+fields of the <code>Context</code> structure. Each function within the <code>#[rtic::app]</code> item
 gets a different <code>Context</code> type.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     // change this
     #[task(resources = [x], spawn = [a], schedule = [b])]
@@ -219,7 +223,7 @@ variables to a <code>struct Resources</code>.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     // change this
     static mut X: u32 = 0;
@@ -239,13 +243,13 @@ const APP: () = {
 <h2><a class="header" href="#device-peripherals" id="device-peripherals">Device peripherals</a></h2>
 <p>If your application was accessing the device peripherals in <code>#[init]</code> through
 the <code>device</code> variable then you'll need to add <code>peripherals = true</code> to the
-<code>#[rtfm::app]</code> attribute to continue to access the device peripherals through
+<code>#[rtic::app]</code> attribute to continue to access the device peripherals through
 the <code>device</code> field of the <code>init::Context</code> structure.</p>
 <p>Change this:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     #[init]
     fn init() {
@@ -259,7 +263,7 @@ const APP: () = {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */, peripherals = true)]
+#[rtic::app(/* .. */, peripherals = true)]
 //                    ^^^^^^^^^^^^^^^^^^
 const APP: () = {
     #[init]
@@ -279,7 +283,7 @@ hardware tasks in v0.5.x use the <code>#[task]</code> attribute with the <code>b
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     // hardware tasks
     #[exception]
@@ -299,7 +303,7 @@ const APP: () = {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     #[task(binds = SVCall)]
     //     ^^^^^^^^^^^^^^
@@ -319,11 +323,11 @@ const APP: () = {
 <h2><a class="header" href="#schedule" id="schedule"><code>schedule</code></a></h2>
 <p>The <code>timer-queue</code> feature has been removed. To use the <code>schedule</code> API one must
 first define the monotonic timer the runtime will use using the <code>monotonic</code>
-argument of the <code>#[rtfm::app]</code> attribute. To continue using the cycle counter
+argument of the <code>#[rtic::app]</code> attribute. To continue using the cycle counter
 (CYCCNT) as the monotonic timer, and match the behavior of version v0.4.x, add
-the <code>monotonic = rtfm::cyccnt::CYCCNT</code> argument to the <code>#[rtfm::app]</code> attribute.</p>
+the <code>monotonic = rtic::cyccnt::CYCCNT</code> argument to the <code>#[rtic::app]</code> attribute.</p>
 <p>Also, the <code>Duration</code> and <code>Instant</code> types and the <code>U32Ext</code> trait have been moved
-into the <code>rtfm::cyccnt</code> module. This module is only available on ARMv7-M+
+into the <code>rtic::cyccnt</code> module. This module is only available on ARMv7-M+
 devices. The removal of the <code>timer-queue</code> also brings back the <code>DWT</code> peripheral
 inside the core peripherals struct, this will need to be enabled by the application
 inside <code>init</code>. </p>
@@ -331,9 +335,9 @@ inside <code>init</code>. </p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-use rtfm::{Duration, Instant, U32Ext};
+use rtic::{Duration, Instant, U32Ext};
 
-#[rtfm::app(/* .. */)]
+#[rtic::app(/* .. */)]
 const APP: () = {
     #[task(schedule = [b])]
     fn a() {
@@ -345,10 +349,10 @@ const APP: () = {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-use rtfm::cyccnt::{Duration, Instant, U32Ext};
+use rtic::cyccnt::{Duration, Instant, U32Ext};
 //        ^^^^^^^^
 
-#[rtfm::app(/* .. */, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(/* .. */, monotonic = rtic::cyccnt::CYCCNT)]
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 const APP: () = {
     #[init]
@@ -375,7 +379,7 @@ const APP: () = {
                         
 
                         
-                            <a rel="next" href="internals.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="migration_rtic.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -393,7 +397,7 @@ const APP: () = {
                 
 
                 
-                    <a href="internals.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="migration_rtic.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

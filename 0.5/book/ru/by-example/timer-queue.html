@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Очередь таймера - Real Time For the Masses</title>
+        <title>Очередь таймера - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html" class="active"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html" class="active"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,7 +110,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
@@ -146,15 +146,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#Очередь-таймера" id="Очередь-таймера">Очередь таймера</a></h1>
-<p>Когда включена опция <code>timer-queue</code>, фреймворк RTFM включает
+<p>Когда включена опция <code>timer-queue</code>, фреймворк RTIC включает
 <em>глобальную очередь таймера</em>, которую приложения могут использовать, чтобы
 <em>планировать</em> программные задачи на запуск через некоторое время в будущем.</p>
 <p>Чтобы была возможность планировать программную задачу, имя задачи должно
 присутствовать в аргументе <code>schedule</code> контекста атрибута. Когда задача
-планируется, момент (<a href="../../../api/rtfm/struct.Instant.html"><code>Instant</code></a>), в который задачу нужно запустить, нужно передать
+планируется, момент (<a href="../../../api/rtic/struct.Instant.html"><code>Instant</code></a>), в который задачу нужно запустить, нужно передать
 как первый аргумент вызова <code>schedule</code>.</p>
-<p>Рантайм RTFM включает монотонный, растущий только вверх, 32-битный таймер,
-значение которого можно запросить конструктором <code>Instant::now</code>. Время (<a href="../../../api/rtfm/struct.Duration.html"><code>Duration</code></a>)
+<p>Рантайм RTIC включает монотонный, растущий только вверх, 32-битный таймер,
+значение которого можно запросить конструктором <code>Instant::now</code>. Время (<a href="../../../api/rtic/struct.Duration.html"><code>Duration</code></a>)
 можно передать в <code>Instant::now()</code>, чтобы получить <code>Instant</code> в будущем. Монотонный
 таймер отключен пока запущен <code>init</code>, поэтому <code>Instant::now()</code> всегда возвращает
 значение <code>Instant(0 /* циклов тактовой частоты */)</code>; таймер включается сразу перед
@@ -181,10 +181,10 @@
 use cortex_m::peripheral::DWT;
 use cortex_m_semihosting::hprintln;
 use panic_halt as _;
-use rtfm::cyccnt::{Instant, U32Ext as _};
+use rtic::cyccnt::{Instant, U32Ext as _};
 
 // NOTE: does NOT work on QEMU!
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(schedule = [foo, bar])]
     fn init(mut cx: init::Context) {
@@ -244,18 +244,18 @@ foo  @ Instant(8000173)
 
 use cortex_m_semihosting::hprintln;
 use panic_semihosting as _;
-use rtfm::cyccnt::{Instant, U32Ext};
+use rtic::cyccnt::{Instant, U32Ext};
 
 const PERIOD: u32 = 8_000_000;
 
 // NOTE: does NOT work on QEMU!
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(schedule = [foo])]
     fn init(cx: init::Context) {
         // omitted: initialization of `CYCCNT`
 
-        cx.schedule.foo(Instant::now() + PERIOD.cycles()).unwrap();
+        cx.schedule.foo(cx.start + PERIOD.cycles()).unwrap();
     }
 
     #[task(schedule = [foo])]
@@ -311,7 +311,7 @@ use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 // NOTE: does NOT properly work on QEMU
-#[rtfm::app(device = lm3s6965, monotonic = rtfm::cyccnt::CYCCNT)]
+#[rtic::app(device = lm3s6965, monotonic = rtic::cyccnt::CYCCNT)]
 const APP: () = {
     #[init(spawn = [foo])]
     fn init(cx: init::Context) {
@@ -332,7 +332,7 @@ const APP: () = {
         if *ONCE {
             *ONCE = false;
 
-            rtfm::pend(Interrupt::UART0);
+            rtic::pend(Interrupt::UART0);
         } else {
             debug::exit(debug::EXIT_SUCCESS);
         }

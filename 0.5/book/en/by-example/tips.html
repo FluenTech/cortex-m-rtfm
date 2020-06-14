@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tips &amp; tricks - Real Time For the Masses</title>
+        <title>Tips &amp; tricks - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html" class="active"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">4.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">5.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html" class="active"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="../internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,11 +110,15 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
                             </a>
                             
                         </div>
@@ -152,9 +156,9 @@
 appear as <em>different</em> types in different contexts one cannot refactor a common
 operation that uses resources into a plain function; however, such refactor is
 possible using <em>generics</em>.</p>
-<p>All resource proxies implement the <code>rtfm::Mutex</code> trait. On the other hand,
+<p>All resource proxies implement the <code>rtic::Mutex</code> trait. On the other hand,
 unique references (<code>&amp;mut-</code>) do <em>not</em> implement this trait (due to limitations in
-the trait system) but one can wrap these references in the <a href="../../../api/rtfm/struct.Exclusive.html"><code>rtfm::Exclusive</code></a>
+the trait system) but one can wrap these references in the <a href="../../../api/rtic/struct.Exclusive.html"><code>rtic::Exclusive</code></a>
 newtype which does implement the <code>Mutex</code> trait. With the help of this newtype
 one can write a generic function that operates on generic resources and call it
 from different tasks to perform some operation on the same set of resources.
@@ -172,9 +176,9 @@ Here's one such example:</p>
 use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
-use rtfm::{Exclusive, Mutex};
+use rtic::{Exclusive, Mutex};
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -183,8 +187,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -196,7 +200,7 @@ const APP: () = {
         // second argument has type `resources::shared`
         advance(STATE, c.resources.shared);
 
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART1);
 
         debug::exit(debug::EXIT_SUCCESS);
     }
@@ -261,7 +265,7 @@ use cortex_m_semihosting::debug;
 use cortex_m_semihosting::hprintln;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[cfg(debug_assertions)] // &lt;- `true` when using the `dev` profile
@@ -322,8 +326,8 @@ foo has been called 1 time
 foo has been called 2 times
 </code></pre>
 <h2><a class="header" href="#running-tasks-from-ram" id="running-tasks-from-ram">Running tasks from RAM</a></h2>
-<p>The main goal of moving the specification of RTFM applications to attributes in
-RTFM v0.4.0 was to allow inter-operation with other attributes. For example, the
+<p>The main goal of moving the specification of RTIC applications to attributes in
+RTIC v0.4.0 was to allow inter-operation with other attributes. For example, the
 <code>link_section</code> attribute can be applied to tasks to place them in RAM; this can
 improve performance in some cases.</p>
 <blockquote>
@@ -350,7 +354,7 @@ adding a <code>ramfunc</code> attribute in a future release.</p>
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init(spawn = [bar])]
     fn init(c: init::Context) {
@@ -423,7 +427,7 @@ use heapless::{
 };
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
-use rtfm::app;
+use rtic::app;
 
 // Declare a pool of 128-byte memory blocks
 pool!(P: [u8; 128]);
@@ -437,7 +441,7 @@ const APP: () = {
         // Increase the capacity of the memory pool by ~4
         P::grow(MEMORY);
 
-        rtfm::pend(Interrupt::I2C0);
+        rtic::pend(Interrupt::I2C0);
     }
 
     #[task(binds = I2C0, priority = 2, spawn = [foo, bar])]
@@ -482,19 +486,19 @@ bar(0x2000008c)
 foo(0x20000110)
 </code></pre>
 <h2><a class="header" href="#inspecting-the-expanded-code" id="inspecting-the-expanded-code">Inspecting the expanded code</a></h2>
-<p><code>#[rtfm::app]</code> is a procedural macro that produces support code. If for some
+<p><code>#[rtic::app]</code> is a procedural macro that produces support code. If for some
 reason you need to inspect the code generated by this macro you have two
 options:</p>
-<p>You can inspect the file <code>rtfm-expansion.rs</code> inside the <code>target</code> directory. This
-file contains the expansion of the <code>#[rtfm::app]</code> item (not your whole program!)
-of the <em>last built</em> (via <code>cargo build</code> or <code>cargo check</code>) RTFM application. The
+<p>You can inspect the file <code>rtic-expansion.rs</code> inside the <code>target</code> directory. This
+file contains the expansion of the <code>#[rtic::app]</code> item (not your whole program!)
+of the <em>last built</em> (via <code>cargo build</code> or <code>cargo check</code>) RTIC application. The
 expanded code is not pretty printed by default so you'll want to run <code>rustfmt</code>
 over it before you read it.</p>
 <pre><code class="language-console">$ cargo build --example foo
 
-$ rustfmt target/rtfm-expansion.rs
+$ rustfmt target/rtic-expansion.rs
 
-$ tail target/rtfm-expansion.rs
+$ tail target/rtic-expansion.rs
 </code></pre>
 <pre><pre class="playpen"><code class="language-rust">#[doc = r&quot; Implementation details&quot;]
 const APP: () = {
@@ -502,18 +506,18 @@ const APP: () = {
     use lm3s6965 as _;
     #[no_mangle]
     unsafe extern &quot;C&quot; fn main() -&gt; ! {
-        rtfm::export::interrupt::disable();
-        let mut core: rtfm::export::Peripherals = core::mem::transmute(());
+        rtic::export::interrupt::disable();
+        let mut core: rtic::export::Peripherals = core::mem::transmute(());
         core.SCB.scr.modify(|r| r | 1 &lt;&lt; 1);
-        rtfm::export::interrupt::enable();
+        rtic::export::interrupt::enable();
         loop {
-            rtfm::export::wfi()
+            rtic::export::wfi()
         }
     }
 };
 </code></pre></pre>
 <p>Or, you can use the <a href="https://crates.io/crates/cargo-expand"><code>cargo-expand</code></a> subcommand. This subcommand will expand
-<em>all</em> the macros, including the <code>#[rtfm::app]</code> attribute, and modules in your
+<em>all</em> the macros, including the <code>#[rtic::app]</code> attribute, and modules in your
 crate and print the output to the console.</p>
 <pre><code class="language-console">$ # produces the same output as before
 $ cargo expand --example smallest | tail
@@ -535,7 +539,7 @@ use cortex_m_semihosting::hprintln;
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         // Some resources to work with
@@ -549,8 +553,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
     }
 
     // Direct destructure

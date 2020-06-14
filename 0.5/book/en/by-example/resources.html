@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Resources - Real Time For the Masses</title>
+        <title>Resources - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html" class="active"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../internals.html"><strong aria-hidden="true">3.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">3.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">3.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">3.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">3.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">3.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">3.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">3.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">3.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">4.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">5.</strong> Heterogeneous multi-core support</a></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Preface</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC by example</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> The app attribute</a></li><li><a href="../by-example/resources.html" class="active"><strong aria-hidden="true">1.2.</strong> Resources</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Software tasks</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Timer queue</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.5.</strong> Types, Send and Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.6.</strong> Starting a new project</a></li><li><a href="../by-example/tips.html"><strong aria-hidden="true">1.7.</strong> Tips &amp; tricks</a></li></ol></li><li><a href="../migration.html"><strong aria-hidden="true">2.</strong> Migrating from v0.4.x to v0.5.0</a></li><li><a href="../migration_rtic.html"><strong aria-hidden="true">3.</strong> Migrating from RTFM to RTIC</a></li><li><a href="../internals.html"><strong aria-hidden="true">4.</strong> Under the hood</a></li><li><ol class="section"><li><a href="../internals/interrupt-configuration.html"><strong aria-hidden="true">4.1.</strong> Interrupt configuration</a></li><li><a href="../internals/non-reentrancy.html"><strong aria-hidden="true">4.2.</strong> Non-reentrancy</a></li><li><a href="../internals/access.html"><strong aria-hidden="true">4.3.</strong> Access control</a></li><li><a href="../internals/late-resources.html"><strong aria-hidden="true">4.4.</strong> Late resources</a></li><li><a href="../internals/critical-sections.html"><strong aria-hidden="true">4.5.</strong> Critical sections</a></li><li><a href="../internals/ceilings.html"><strong aria-hidden="true">4.6.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">4.7.</strong> Software tasks</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">4.8.</strong> Timer queue</a></li></ol></li><li><a href="../homogeneous.html"><strong aria-hidden="true">5.</strong> Homogeneous multi-core support</a></li><li><a href="../heterogeneous.html"><strong aria-hidden="true">6.</strong> Heterogeneous multi-core support</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,11 +110,15 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                            <a href="https://github.com/rtic-rs/cortex-m-rtic" title="Git repository" aria-label="Git repository">
+                                <i id="git-repository-button" class="fa fa-github"></i>
                             </a>
                             
                         </div>
@@ -155,7 +159,7 @@ can access which resource.</p>
 pseudo-module. Each field in the structure corresponds to a different resource.
 Resources can optionally be given an initial value using the <code>#[init]</code>
 attribute. Resources that are not given an initial value are referred to as
-<em>late</em> resources and are covered in more detail in a follow up section in this
+<em>late</em> resources and are covered in more detail in a follow-up section in this
 page.</p>
 <p>Each context (task handler, <code>init</code> or <code>idle</code>) must declare the resources it
 intends to access in its corresponding metadata attribute using the <code>resources</code>
@@ -178,7 +182,7 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         // A resource
@@ -188,8 +192,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
     }
 
     // `shared` cannot be accessed from this context
@@ -226,7 +230,7 @@ const APP: () = {
 UART0: shared = 1
 UART1: shared = 2
 </code></pre>
-<p>Note that the <code>shared</code> resource cannot accessed from <code>idle</code>. Attempting to do
+<p>Note that the <code>shared</code> resource cannot be accessed from <code>idle</code>. Attempting to do
 so results in a compile error.</p>
 <h2><a class="header" href="#lock" id="lock"><code>lock</code></a></h2>
 <p>In the presence of preemption critical sections are required to mutate shared
@@ -235,7 +239,7 @@ the priorities of tasks and which tasks can access which resources it enforces
 that critical sections are used where required for memory safety.</p>
 <p>Where a critical section is required the framework hands out a resource proxy
 instead of a reference. This resource proxy is a structure that implements the
-<a href="../../../api/rtfm/trait.Mutex.html"><code>Mutex</code></a> trait. The only method on this trait, <a href="../../../api/rtfm/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure
+<a href="../../../api/rtic/trait.Mutex.html"><code>Mutex</code></a> trait. The only method on this trait, <a href="../../../api/rtic/trait.Mutex.html#method.lock"><code>lock</code></a>, runs its closure
 argument in a critical section.</p>
 <p>The critical section created by the <code>lock</code> API is based on dynamic priorities:
 it temporarily raises the dynamic priority of the context to a <em>ceiling</em>
@@ -263,7 +267,7 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -272,7 +276,7 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::GPIOA);
+        rtic::pend(Interrupt::GPIOA);
     }
 
     // when omitted priority is assumed to be `1`
@@ -286,12 +290,12 @@ const APP: () = {
             *shared += 1;
 
             // GPIOB will *not* run right now due to the critical section
-            rtfm::pend(Interrupt::GPIOB);
+            rtic::pend(Interrupt::GPIOB);
 
             hprintln!(&quot;B - shared = {}&quot;, *shared).unwrap();
 
             // GPIOC does not contend for `shared` so it's allowed to run now
-            rtfm::pend(Interrupt::GPIOC);
+            rtic::pend(Interrupt::GPIOC);
         });
 
         // critical section is over: GPIOB can now start
@@ -324,12 +328,12 @@ D - shared = 2
 E
 </code></pre>
 <h2><a class="header" href="#late-resources" id="late-resources">Late resources</a></h2>
-<p>Late resources are resources that are not given an initial value at compile
-using the <code>#[init]</code> attribute but instead are initialized are runtime using the
+<p>Late resources are resources that are not given an initial value at compile time
+using the <code>#[init]</code> attribute but instead are initialized at runtime using the
 <code>init::LateResources</code> values returned by the <code>init</code> function.</p>
 <p>Late resources are useful for <em>moving</em> (as in transferring the ownership of)
 peripherals initialized in <code>init</code> into interrupt handlers.</p>
-<p>The example below uses late resources to stablish a lockless, one-way channel
+<p>The example below uses late resources to establish a lockless, one-way channel
 between the <code>UART0</code> interrupt handler and the <code>idle</code> task. A single producer
 single consumer <a href="../../../api/heapless/spsc/struct.Queue.html"><code>Queue</code></a> is used as the channel. The queue is split into
 consumer and producer end points in <code>init</code> and then each end point is stored
@@ -354,7 +358,7 @@ use heapless::{
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     // Late resources
     struct Resources {
@@ -380,7 +384,7 @@ const APP: () = {
 
                 debug::exit(debug::EXIT_SUCCESS);
             } else {
-                rtfm::pend(Interrupt::UART0);
+                rtic::pend(Interrupt::UART0);
             }
         }
     }
@@ -406,7 +410,7 @@ tasks running at different priorities. The downside is that the task only gets a
 shared reference (<code>&amp;-</code>) to the resource, limiting the operations it can perform
 on it, but where a shared reference is enough this approach reduces the number
 of required locks.</p>
-<p>Note that in this release of RTFM it is not possible to request both exclusive
+<p>Note that in this release of RTIC it is not possible to request both exclusive
 access (<code>&amp;mut-</code>) and shared access (<code>&amp;-</code>) to the <em>same</em> resource from different
 tasks. Attempting to do so will result in a compile error.</p>
 <p>In the example below a key (e.g. a cryptographic key) is loaded (or created) at
@@ -426,7 +430,7 @@ use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         key: u32,
@@ -434,8 +438,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) -&gt; init::LateResources {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
 
         init::LateResources { key: 0xdeadbeef }
     }

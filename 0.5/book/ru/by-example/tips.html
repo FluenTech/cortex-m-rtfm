@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Советы и хитрости - Real Time For the Masses</title>
+        <title>Советы и хитрости - Real-Time Interrupt-driven Concurrency</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTFM в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html" class="active"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
+                <ol class="chapter"><li class="affix"><a href="../preface.html">Введение</a></li><li><a href="../by-example.html"><strong aria-hidden="true">1.</strong> RTIC в примерах</a></li><li><ol class="section"><li><a href="../by-example/app.html"><strong aria-hidden="true">1.1.</strong> Атрибут app</a></li><li><a href="../by-example/resources.html"><strong aria-hidden="true">1.2.</strong> Ресурсы</a></li><li><a href="../by-example/tasks.html"><strong aria-hidden="true">1.3.</strong> Задачи</a></li><li><a href="../by-example/timer-queue.html"><strong aria-hidden="true">1.4.</strong> Очередь таймера</a></li><li><a href="../by-example/singletons.html"><strong aria-hidden="true">1.5.</strong> Одиночки</a></li><li><a href="../by-example/types-send-sync.html"><strong aria-hidden="true">1.6.</strong> Типы, Send и Sync</a></li><li><a href="../by-example/new.html"><strong aria-hidden="true">1.7.</strong> Создание нового проекта</a></li><li><a href="../by-example/tips.html" class="active"><strong aria-hidden="true">1.8.</strong> Советы и хитрости</a></li></ol></li><li><a href="../internals.html"><strong aria-hidden="true">2.</strong> Под капотом</a></li><li><ol class="section"><li><a href="../internals/ceilings.html"><strong aria-hidden="true">2.1.</strong> Ceiling analysis</a></li><li><a href="../internals/tasks.html"><strong aria-hidden="true">2.2.</strong> Диспетчер задач</a></li><li><a href="../internals/timer-queue.html"><strong aria-hidden="true">2.3.</strong> Очередь таймера</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,7 +110,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Real Time For the Masses</h1>
+                        <h1 class="menu-title">Real-Time Interrupt-driven Concurrency</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
@@ -164,9 +164,9 @@
 use cortex_m_semihosting::{debug, hprintln};
 use lm3s6965::Interrupt;
 use panic_semihosting as _;
-use rtfm::{Exclusive, Mutex};
+use rtic::{Exclusive, Mutex};
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     struct Resources {
         #[init(0)]
@@ -175,8 +175,8 @@ const APP: () = {
 
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART1);
     }
 
     #[task(binds = UART0, resources = [shared])]
@@ -188,7 +188,7 @@ const APP: () = {
         // second argument has type `resources::shared`
         advance(STATE, c.resources.shared);
 
-        rtfm::pend(Interrupt::UART1);
+        rtic::pend(Interrupt::UART1);
 
         debug::exit(debug::EXIT_SUCCESS);
     }
@@ -234,8 +234,8 @@ shared: 2 -&gt; 4
 к данным в разделяемых ресурсах, тогда Ваш код продолжит компилироваться,
 когда Вы измените приоритет задач.</p>
 <h2><a class="header" href="#Запуск-задач-из-ОЗУ" id="Запуск-задач-из-ОЗУ">Запуск задач из ОЗУ</a></h2>
-<p>Главной целью переноса описания программы на RTFM в атрибуты в
-RTFM v0.4.x была возможность взаимодействия с другими атрибутами.
+<p>Главной целью переноса описания программы на RTIC в атрибуты в
+RTIC v0.4.x была возможность взаимодействия с другими атрибутами.
 Напримерe, атрибут <code>link_section</code> можно применять к задачам, чтобы разместить
 их в ОЗУ; это может улучшить производительность в некоторых случаях.</p>
 <blockquote>
@@ -262,7 +262,7 @@ v0.6.5 но создано <a href="https://github.com/rust-embedded/cortex-m-rt
 use cortex_m_semihosting::{debug, hprintln};
 use panic_semihosting as _;
 
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init(spawn = [bar])]
     fn init(c: init::Context) {
@@ -310,7 +310,7 @@ $ cargo nm --example ramfunc --release | grep ' bar::'
 
 ## `binds`
 
-**ПРИМЕЧАНИЕ**: Требуется RTFM не ниже 0.4.2
+**ПРИМЕЧАНИЕ**: Требуется RTIC не ниже 0.4.2
 
 Вы можете давать аппаратным задачам имена похожие на имена обычных задач.
 Для этого нужно использовать аргумент `binds`: Вы называете функцию
@@ -332,11 +332,11 @@ use lm3s6965::Interrupt;
 use panic_semihosting as _;
 
 // `examples/interrupt.rs` rewritten to use `binds`
-#[rtfm::app(device = lm3s6965)]
+#[rtic::app(device = lm3s6965)]
 const APP: () = {
     #[init]
     fn init(_: init::Context) {
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
 
         hprintln!(&quot;init&quot;).unwrap();
     }
@@ -345,7 +345,7 @@ const APP: () = {
     fn idle(_: idle::Context) -&gt; ! {
         hprintln!(&quot;idle&quot;).unwrap();
 
-        rtfm::pend(Interrupt::UART0);
+        rtic::pend(Interrupt::UART0);
 
         debug::exit(debug::EXIT_SUCCESS);
 
