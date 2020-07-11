@@ -39,9 +39,10 @@ pub fn codegen(
             root_init.push(quote!(
             pub struct SysTimer;
             impl rtic::time::Clock for SysTimer {
-                type Rep = i32;
-                const PERIOD: rtic::time::Period = rtic::time::Period::new(1, #sys_timer_freq as i32);
-                fn now() -> rtic::time::Instant<Self> {
+                type Rep = u32;
+                type ImplError = ();
+                const PERIOD: rtic::time::Period = <rtic::time::Period>::new(1, #sys_timer_freq as Self::Rep);
+                fn now(&self) -> Result<rtic::time::Instant<Self>, rtic::time::clock::Error<Self::ImplError>> {
                     unimplemented!()
                 }
             }

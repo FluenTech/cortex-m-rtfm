@@ -17,11 +17,12 @@ pub fn xpend(_core: u8, _interrupt: impl Nr) {}
 pub struct MT;
 
 impl time::Clock for MT {
-    type Rep = i32;
-    const PERIOD: time::Period<i32> = time::Period::new(1, 1);
+    type Rep = u32;
+    const PERIOD: time::Period = <time::Period>::new(1, 1);
+    type ImplError = ();
 
-    fn now() -> time::Instant<Self> {
-        unsafe { time::Instant::new((0xE0001004 as *const u32).read_volatile() as i32) }
+    fn now(&self) -> Result<time::Instant<Self>, time::clock::Error<Self::ImplError>> {
+        Ok(unsafe { time::Instant::new((0xE0001004 as *const u32).read_volatile() as Self::Rep) })
     }
 }
 

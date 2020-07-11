@@ -2,7 +2,7 @@
 #![no_std]
 
 use panic_halt as _;
-use rtic::time::prelude::*;
+use rtic::time::traits::*;
 
 #[rtic::app(cores = 2, device = homogeneous, monotonic = homogeneous::MT, sys_timer_freq = 1_000_000)]
 const APP: () = {
@@ -13,12 +13,16 @@ const APP: () = {
 
     #[task(core = 0, schedule = [ping])]
     fn pong(c: pong::Context) {
-        c.schedule.ping(c.scheduled + 1_000_000.microseconds()).ok();
+        c.schedule
+            .ping(c.scheduled + 1_000_000_u32.microseconds())
+            .ok();
     }
 
     #[task(core = 1, schedule = [pong])]
     fn ping(c: ping::Context) {
-        c.schedule.pong(c.scheduled + 1_000_000.microseconds()).ok();
+        c.schedule
+            .pong(c.scheduled + 1_000_000_u32.microseconds())
+            .ok();
     }
 
     extern "C" {

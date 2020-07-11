@@ -8,11 +8,12 @@ use core::{
 use cortex_m::peripheral::{SCB, SYST};
 use heapless::{binary_heap::Min, ArrayLength, BinaryHeap};
 
-use crate::time::{self, units::*, Duration, Instant};
+use crate::time::{self, traits::*, units::*, Instant};
 use crate::Monotonic;
 
 pub struct TimerQueue<SysTimer, Clock, Task, N>(
     pub BinaryHeap<NotReady<Clock, Task>, N, Min>,
+    pub Clock,
     pub PhantomData<SysTimer>,
 )
 where
@@ -55,7 +56,7 @@ where
     pub fn dequeue(&mut self) -> Option<(Task, u8)> {
         unsafe {
             if let Some(instant) = self.0.peek().map(|p| p.instant) {
-                let now = Clock::now();
+                let now = self.1.now().unwrap();
 
                 if instant < now {
                     // task became ready
@@ -66,8 +67,8 @@ where
                     // set a new timeout
                     const MAX: u32 = 0x00ffffff;
 
-                    let dur: Microseconds<i64> = instant.duration_since(&now).unwrap();
-                    let systick_ticks: i64 =
+                    let dur: Microseconds<u64> = instant.duration_since(&now).unwrap();
+                    let systick_ticks: u64 =
                         dur.into_ticks(SysTimer::PERIOD).expect("into_ticks failed");
 
                     // ARM Architecture Reference Manual says:
