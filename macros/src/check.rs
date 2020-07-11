@@ -224,6 +224,7 @@ pub fn app<'a>(app: &'a App, analysis: &Analysis) -> parse::Result<Extra<'a>> {
         ));
     }
 
+    #[cfg(not(feature = "monotonic_as_systimer"))]
     if !analysis.timer_queues.is_empty() && sys_timer_freq.is_none() {
         return Err(parse::Error::new(
             Span::call_site(),

@@ -46,7 +46,10 @@ pub fn codegen(app: &App, analysis: &Analysis, extra: &Extra) -> Vec<TokenStream
             let doc = format!("Core #{} timer queue", sender);
             let m = extra.monotonic();
             let n = util::capacity_typenum(timer_queue.capacity, false);
+            #[cfg(not(feature = "monotonic_as_systimer"))]
             let tq_ty = quote!(rtic::export::TimerQueue<SysTimer, #m, #t, #n>);
+            #[cfg(feature = "monotonic_as_systimer")]
+            let tq_ty = quote!(rtic::export::TimerQueue<#m, #m, #t, #n>);
 
             let section = util::link_section("bss", sender);
             items.push(quote!(
@@ -57,7 +60,7 @@ pub fn codegen(app: &App, analysis: &Analysis, extra: &Extra) -> Vec<TokenStream
                     rtic::export::BinaryHeap(
                         rtic::export::iBinaryHeap::new()
                     ),
-                    core::marker::PhantomData::<SysTimer>,
+                    core::marker::PhantomData,
                 );
 
                 #cfg_sender

@@ -45,6 +45,7 @@ pub fn codegen(
                 fn now(&self) -> Result<rtic::time::Instant<Self>, rtic::time::clock::Error<Self::ImplError>> {
                     unimplemented!()
                 }
+
             }
             ));
         };

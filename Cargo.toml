@@ -36,7 +36,7 @@ required-features = ["__v7"]
 
 [[example]]
 name = "schedule-nrf52"
-required-features = ["__v7"]
+required-features = ["__v7", "monotonic_as_systimer"]
 
 [[example]]
 name = "t-cfg"
@@ -86,6 +86,7 @@ trybuild = "1"
 [features]
 heterogeneous = ["cortex-m-rtic-macros/heterogeneous", "microamp"]
 homogeneous = ["cortex-m-rtic-macros/homogeneous"]
+monotonic_as_systimer = ["cortex-m-rtic-macros/monotonic_as_systimer"]
 # used for testing this crate; do not use in applications
 __v7 =[]
 __min_r1_43 =[]
@@ -116,3 +117,6 @@ debug = false
 debug-assertions = false
 opt-level = 0
 overflow-checks = false
+
+[patch.crates-io]
+embedded-time = { path = "../embedded-time" }

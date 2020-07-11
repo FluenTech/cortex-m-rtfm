@@ -17,14 +17,14 @@ pub struct TimerQueue<SysTimer, Clock, Task, N>(
     pub PhantomData<SysTimer>,
 )
 where
-    SysTimer: time::Clock,
+    SysTimer: Monotonic,
     Clock: Monotonic,
     N: ArrayLength<NotReady<Clock, Task>>,
     Task: Copy;
 
 impl<SysTimer, Clock, Task, N> TimerQueue<SysTimer, Clock, Task, N>
 where
-    SysTimer: time::Clock,
+    SysTimer: Monotonic,
     Clock: Monotonic,
     N: ArrayLength<NotReady<Clock, Task>>,
     Task: Copy,
@@ -42,10 +42,12 @@ where
             .unwrap_or(true)
         {
             if is_empty {
-                mem::transmute::<_, SYST>(()).enable_interrupt();
+                Clock::enable_interrupt();
+                // mem::transmute::<_, SYST>(()).enable_interrupt();
             }
 
             // set SysTick pending
+            Clock::pend_interrupt();
             SCB::set_pendst();
         }
 
@@ -58,37 +60,44 @@ where
             if let Some(instant) = self.0.peek().map(|p| p.instant) {
                 let now = self.1.now().unwrap();
 
-                if instant < now {
+                if instant <= now {
                     // task became ready
                     let nr = self.0.pop_unchecked();
 
                     Some((nr.task, nr.index))
                 } else {
                     // set a new timeout
-                    const MAX: u32 = 0x00ffffff;
+                    #[cfg(feature = "monotonic_as_systimer")]
+                    Clock::wake_at(instant);
 
-                    let dur: Microseconds<u64> = instant.duration_since(&now).unwrap();
-                    let systick_ticks: u64 =
-                        dur.into_ticks(SysTimer::PERIOD).expect("into_ticks failed");
+                    #[cfg(not(feature = "monotonic_as_systimer"))]
+                    {
+                        const MAX: u32 = 0x00ffffff;
 
-                    // ARM Architecture Reference Manual says:
-                    // "Setting SYST_RVR to zero has the effect of
-                    // disabling the SysTick counter independently
-                    // of the counter enable bit."
-                    let systick_ticks = u32::try_from(systick_ticks).ok()?;
+                        let dur: Microseconds<u64> = instant.duration_since(&now).unwrap();
+                        let systick_ticks: u64 =
+                            dur.into_ticks(SysTimer::PERIOD).expect("into_ticks failed");
 
-                    let systick_ticks = cmp::min(cmp::max(systick_ticks, 1), MAX);
+                        // ARM Architecture Reference Manual says:
+                        // "Setting SYST_RVR to zero has the effect of
+                        // disabling the SysTick counter independently
+                        // of the counter enable bit."
+                        let systick_ticks = u32::try_from(systick_ticks).ok()?;
 
-                    mem::transmute::<_, SYST>(()).set_reload(systick_ticks);
+                        let systick_ticks = cmp::min(cmp::max(systick_ticks, 1), MAX);
 
-                    // start counting down from the new reload
-                    mem::transmute::<_, SYST>(()).clear_current();
+                        mem::transmute::<_, SYST>(()).set_reload(systick_ticks);
+
+                        // start counting down from the new reload
+                        mem::transmute::<_, SYST>(()).clear_current();
+                    }
 
                     None
                 }
             } else {
                 // the queue is empty
-                mem::transmute::<_, SYST>(()).disable_interrupt();
+                SysTimer::disable_interrupt();
+                // mem::transmute::<_, SYST>(()).disable_interrupt();
 
                 None
             }
